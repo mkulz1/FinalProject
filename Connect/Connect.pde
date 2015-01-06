@@ -8,7 +8,7 @@ int rows = 5;
 
 void setup() {
   background(0);
-  size(700, 500);
+  size(700, 500, P2D);
   grid = new Cell[cols][rows];
   for (int i = 1; i < cols; i++) {
     for (int j = 1; j < rows; j++) {
@@ -25,7 +25,8 @@ void mousePressed() {
   } else {
     fill(0, 0, 255);
   }
-  ellipse(deterColumn(mouseX), mouseY, 90, 90);
+  PShape token = createShape(ELLIPSE, deterColumn(mouseX), mouseY, 90, 90);
+  shape(token);
   turn++;
 }
 
@@ -77,6 +78,7 @@ class Cell {
     stroke(255);
     fill(255, 200, 40);
     ellipse(x, y, 90, 90);
+    shapeMode(CENTER);
   }
 }
 
