@@ -6,30 +6,28 @@ int cols = 7;
 int rows = 5;
 
 void setup() {
+  background(0);
   size(700, 500);
   grid = new Cell[cols][rows];
   for (int i = 1; i < cols; i++) {
     for (int j = 1; j < rows; j++) {
       // Initialize each object
       grid[i][j] = new Cell(i*100, j*100, 100, 100);
+      grid[i][j].display();
     }
   }
+}
+
+void mousePressed() {
+  ellipse(mouseX,mouseY,100,100);
 }
 
 
 void draw() {
-  background(0);
-  // The counter variables i and j are also the column and row numbers and 
-  // are used as arguments to the constructor for each object in the grid.  
-  for (int i = 1; i < cols; i++) {
-    for (int j = 1; j < rows; j++) {
-      grid[i][j].display();
-    }
-  }
-  if (mousePressed) {
-    ellipse(mouseX, mouseY, 100, 100);
-  }
+
 }
+
+
 
 // A Cell object
 class Cell {
