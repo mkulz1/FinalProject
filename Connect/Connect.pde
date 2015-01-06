@@ -20,21 +20,37 @@ void setup() {
 }
 
 void mousePressed() {
-  if ( turn % 2 == 0){
-      fill(255,0,0);
-  }else{
-    fill(0,0,255);
+  if ( turn % 2 == 0) {
+    fill(255, 0, 0);
+  } else {
+    fill(0, 0, 255);
   }
-  ellipse(mouseX,mouseY,100,100);
+  ellipse(deterColumn(mouseX), mouseY, 90, 90);
   turn++;
 }
 
 
 void draw() {
-
 }
 
-
+int deterColumn(int x) {
+  int center = 0;
+  if ( x > 50 && x < 150) {
+    center = 100;
+  } else if ( x >= 150 && x < 250) {
+    center = 200;
+  } else if ( x >= 250 && x < 350) {
+    center = 300;
+  } else if ( x >= 350 && x < 450) {
+    center = 400;
+  } else if ( x >= 450 && x < 550) {
+    center = 500;
+  } else if ( x >= 550 && x < 650) {
+    center = 600;
+  } else {
+  }
+  return center;
+}
 
 // A Cell object
 class Cell {
@@ -61,6 +77,4 @@ class Cell {
     ellipse(x, y, 90, 90);
   }
 }
-
-
 
