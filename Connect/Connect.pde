@@ -1,5 +1,6 @@
 // 2D Array of objects
 Cell[][] grid;
+int turn = 0;
 
 // Number of columns and rows in the grid
 int cols = 7;
@@ -19,7 +20,13 @@ void setup() {
 }
 
 void mousePressed() {
+  if ( turn % 2 == 0){
+      fill(255,0,0);
+  }else{
+    fill(0,0,255);
+  }
   ellipse(mouseX,mouseY,100,100);
+  turn++;
 }
 
 
