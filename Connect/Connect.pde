@@ -123,4 +123,3 @@ class Cell {
     shapeMode(CENTER);
   }
 }
-
