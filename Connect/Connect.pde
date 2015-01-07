@@ -43,7 +43,6 @@ void mousePressed() {
   token.stopPoint(token.x);
   // Adds the Token to the tokens ArrayList
   tokens.add(token);
-  gridFilled[(token.y/100)-1][(token.x/100)-1] = true;
   turn++;
 }
 
@@ -58,8 +57,8 @@ void draw() {
       currentToken.y = currentToken.y + 20;
     }
     // If the token is placed below the bottom, sets it to the bottom of the grid
-    if (currentToken.y > height - 100) {
-      currentToken.y = height - 100;
+    if (currentToken.y > currentToken.pointStop) {
+      currentToken.y = currentToken.pointStop;
     }
   }
 }
@@ -78,7 +77,6 @@ int deterColumn(int x) {
     center = 500;
   } else if ( x >= 550 && x < 650) {
     center = 600;
-  } else if (x <= 50 && x >= 0) {
   } else {
   }
   return center;
@@ -99,14 +97,18 @@ class Token {
   }
 
   void stopPoint(int x) {
-    int gridCol = (x / 100) - 1;
-    int stopPoint = 400;
-    for (int i = 0; i < 4; i++) {
-      if (gridFilled[i][gridCol] == false) {
-        stopPoint = (i + 1) * 100;
+    int gridCol = x / 100 - 1;
+    int stopPoint = height - 100;
+    int row = 0;
+    while (row < 4) {
+      if (gridFilled[row][gridCol]) {
+        stopPoint = row * 100;
+        break;
       }
+      row++;
     }
     pointStop = stopPoint;
+    gridFilled[row - 1][gridCol] = true;
   }
 }
 
