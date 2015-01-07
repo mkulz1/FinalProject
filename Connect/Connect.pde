@@ -102,7 +102,7 @@ class Token {
     int gridCol = (x / 100) - 1;
     int stopPoint = 400;
     for (int i = 0; i < 4; i++) {
-      if (gridFilled[i][gridCol]) {
+      if (gridFilled[i][gridCol] == false) {
         stopPoint = (i + 1) * 100;
       }
     }
