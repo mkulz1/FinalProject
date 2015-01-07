@@ -1,5 +1,7 @@
 // 2D Array of objects
 Cell[][] grid;
+// ArrayList of all tokens that have been placed
+ArrayList<Token> tokens = new ArrayList<Token>();
 int turn = 0;
 
 // Number of columns and rows in the grid
@@ -25,13 +27,30 @@ void mousePressed() {
   } else {
     fill(0, 0, 255);
   }
-  PShape token = createShape(ELLIPSE, deterColumn(mouseX), mouseY, 90, 90);
-  shape(token);
+  // Creates a PShape as a token, which is more interactive than a regular ellipse
+  PShape shape = createShape(ELLIPSE, 0, 0, 90, 90);
+  // Adds the PShape to a new Token class
+  Token token = new Token(shape, deterColumn(mouseX), mouseY);
+  // Adds the Token to the tokens ArrayList
+  tokens.add(token);
   turn++;
 }
-
-
+  
 void draw() {
+  setup();
+  // Goes through the ArrayList of tokens and displays them based on their current values
+  for (int i = 0; i < tokens.size(); i++){
+    Token currentToken = tokens.get(i);
+    shape(currentToken.shape, currentToken.x, currentToken.y);
+    // Gradually lowers the y value if the token is not at the bottom
+    if (currentToken.y < height - 100){
+      currentToken.y = currentToken.y + 20;
+    }
+    // If the token is placed below the bottom, sets it to the bottom of the grid
+    if (currentToken.y > height - 100){
+      currentToken.y = height - 100;
+    }
+  }
 }
 
 int deterColumn(int x) {
@@ -53,6 +72,20 @@ int deterColumn(int x) {
   return center;
 }
 
+class Token{
+  // A Token has a PShape and an x and y value
+  PShape shape;
+  int x;
+  int y;
+  
+  // Each variable is set by the constructor
+  Token(PShape shape, int x, int y){
+    this.shape = shape;
+    this.x = x;
+    this.y = y;
+  }
+}
+  
 // A Cell object
 class Cell {
   // A cell object knows about its location in the grid as well as its size with the variables x,y,w,h.
