@@ -42,8 +42,10 @@ void mousePressed() {
   Token token = new Token(shape, deterColumn(mouseX), mouseY);
   token.stopPoint(token.x);
   // Adds the Token to the tokens ArrayList
-  tokens.add(token);
-  turn++;
+  if (token.isValidToken){
+    tokens.add(token);
+    turn++;
+  }
 }
 
 void draw() {
@@ -88,6 +90,8 @@ class Token {
   int x;
   int y;
   int pointStop;
+  // If the token is found to not be placed correctly, valid is set to false and the token is not added to the tokens arrayList
+  boolean isValidToken = true;
 
   // Each variable is set by the constructor
   Token(PShape shape, int x, int y) {
@@ -108,7 +112,11 @@ class Token {
       row++;
     }
     pointStop = stopPoint;
-    gridFilled[row - 1][gridCol] = true;
+    if (row > 0){
+      gridFilled[row  - 1][gridCol] = true;
+    }else{
+      isValidToken = false;
+    }
   }
 }
 
