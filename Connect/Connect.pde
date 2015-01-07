@@ -1,5 +1,6 @@
 // 2D Array of objects
 Cell[][] grid;
+boolean[][] gridFilled = new boolean[5][7];
 // ArrayList of all tokens that have been placed
 ArrayList<Token> tokens = new ArrayList<Token>();
 int turn = 0;
@@ -8,7 +9,7 @@ int turn = 0;
 int cols = 7;
 int rows = 5;
 
-void setup() {
+void drawGrid(){
   background(0);
   size(700, 500, P2D);
   grid = new Cell[cols][rows];
@@ -17,6 +18,14 @@ void setup() {
       // Initialize each object
       grid[i][j] = new Cell(i*100, j*100, 100, 100);
       grid[i][j].display();
+    }
+  }
+}
+void setup() {
+  drawGrid();
+  for (int i = 1; i < rows; i++){
+    for (int j = 1; j < cols; j++){
+      gridFilled[i][j] = false;
     }
   }
 }
@@ -37,7 +46,7 @@ void mousePressed() {
 }
   
 void draw() {
-  setup();
+  drawGrid();
   // Goes through the ArrayList of tokens and displays them based on their current values
   for (int i = 0; i < tokens.size(); i++){
     Token currentToken = tokens.get(i);
