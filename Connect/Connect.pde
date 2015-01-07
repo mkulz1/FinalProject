@@ -27,16 +27,15 @@ void mousePressed() {
   } else {
     fill(0, 0, 255);
   }
-<<<<<<< HEAD
+
   ellipse(deterColumn(mouseX), deterRow(mouseY), 90, 90);
-=======
+
   // Creates a PShape as a token, which is more interactive than a regular ellipse
   PShape shape = createShape(ELLIPSE, 0, 0, 90, 90);
   // Adds the PShape to a new Token class
   Token token = new Token(shape, deterColumn(mouseX), mouseY);
   // Adds the Token to the tokens ArrayList
   tokens.add(token);
->>>>>>> FETCH_HEAD
   turn++;
 }
   
@@ -77,7 +76,7 @@ int deterColumn(int x) {
   return center;
 }
 
-<<<<<<< HEAD
+
 //Determines the row closest to the column.
 int deterRow(int y) {
   int centerRow = 0;
@@ -93,7 +92,7 @@ int deterRow(int y) {
   }
   return centerRow;
 }
-=======
+
 class Token{
   // A Token has a PShape and an x and y value
   PShape shape;
@@ -108,7 +107,7 @@ class Token{
   }
 }
   
->>>>>>> FETCH_HEAD
+
 // A Cell object
 class Cell {
   // A cell object knows about its location in the grid as well as its size with the variables x,y,w,h.
