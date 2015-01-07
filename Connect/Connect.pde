@@ -1,14 +1,15 @@
 // 2D Array of objects
 Cell[][] grid;
+boolean[][] gridFilled = new boolean[5][7];
 // ArrayList of all tokens that have been placed
 ArrayList<Token> tokens = new ArrayList<Token>();
 int turn = 0;
 
-// Number of columns and rows in the grid (+1 than actual)
+// Number of columns and rows in the grid
 int cols = 7;
 int rows = 5;
 
-void setup() {
+void drawGrid(){
   background(0);
   size(700, 500, P2D);
   grid = new Cell[cols][rows];
@@ -20,6 +21,14 @@ void setup() {
     }
   }
 }
+void setup() {
+  drawGrid();
+  for (int i = 1; i < rows; i++){
+    for (int j = 1; j < cols; j++){
+      gridFilled[i][j] = false;
+    }
+  }
+}
 
 void mousePressed() {
   if ( turn % 2 == 0) {
@@ -27,9 +36,6 @@ void mousePressed() {
   } else {
     fill(0, 0, 255);
   }
-
-  ellipse(deterColumn(mouseX), deterRow(mouseY), 90, 90);
-
   // Creates a PShape as a token, which is more interactive than a regular ellipse
   PShape shape = createShape(ELLIPSE, 0, 0, 90, 90);
   // Adds the PShape to a new Token class
@@ -40,7 +46,7 @@ void mousePressed() {
 }
   
 void draw() {
-  setup();
+  drawGrid();
   // Goes through the ArrayList of tokens and displays them based on their current values
   for (int i = 0; i < tokens.size(); i++){
     Token currentToken = tokens.get(i);
@@ -56,7 +62,6 @@ void draw() {
   }
 }
 
-//Determines which column player wants to put their token in.
 int deterColumn(int x) {
   int center = 0;
   if ( x > 50 && x < 150) {
@@ -76,23 +81,6 @@ int deterColumn(int x) {
   return center;
 }
 
-
-//Determines the row closest to the column.
-int deterRow(int y) {
-  int centerRow = 0;
-  if ( y > 50 && y < 150) {
-    centerRow = 100;
-  } else if ( y >= 150 && y < 250) {
-    centerRow = 200;
-  } else if ( y >= 250 && y < 350) {
-    centerRow = 300;
-  } else if ( y >= 350 && y < 450) {
-    centerRow = 400;
-  } else {
-  }
-  return centerRow;
-}
-
 class Token{
   // A Token has a PShape and an x and y value
   PShape shape;
@@ -107,7 +95,6 @@ class Token{
   }
 }
   
-
 // A Cell object
 class Cell {
   // A cell object knows about its location in the grid as well as its size with the variables x,y,w,h.
@@ -124,6 +111,7 @@ class Cell {
     filled = false;
   } 
 
+
   void display() {
     stroke(0);
     fill(255, 255, 0);
@@ -135,4 +123,3 @@ class Cell {
     shapeMode(CENTER);
   }
 }
-
