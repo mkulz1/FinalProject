@@ -1,6 +1,6 @@
 // 2D Array of objects
 Cell[][] grid;
-boolean[][] gridFilled = new boolean[5][7];
+boolean[][] gridFilled = new boolean[4][6];
 // ArrayList of all tokens that have been placed
 ArrayList<Token> tokens = new ArrayList<Token>();
 int turn = 0;
@@ -9,7 +9,7 @@ int turn = 0;
 int cols = 7;
 int rows = 5;
 
-void drawGrid(){
+void drawGrid() {
   background(0);
   size(700, 500, P2D);
   grid = new Cell[cols][rows];
@@ -23,8 +23,8 @@ void drawGrid(){
 }
 void setup() {
   drawGrid();
-  for (int i = 1; i < rows; i++){
-    for (int j = 1; j < cols; j++){
+  for (int i = 1; i < rows - 1; i++) {
+    for (int j = 1; j < cols - 1; j++) {
       gridFilled[i][j] = false;
     }
   }
@@ -40,23 +40,24 @@ void mousePressed() {
   PShape shape = createShape(ELLIPSE, 0, 0, 90, 90);
   // Adds the PShape to a new Token class
   Token token = new Token(shape, deterColumn(mouseX), mouseY);
+  token.stopPoint(token.x);
   // Adds the Token to the tokens ArrayList
   tokens.add(token);
   turn++;
 }
-  
+
 void draw() {
   drawGrid();
   // Goes through the ArrayList of tokens and displays them based on their current values
-  for (int i = 0; i < tokens.size(); i++){
+  for (int i = 0; i < tokens.size (); i++) {
     Token currentToken = tokens.get(i);
     shape(currentToken.shape, currentToken.x, currentToken.y);
     // Gradually lowers the y value if the token is not at the bottom
-    if (currentToken.y < height - 100){
+    if (currentToken.y < currentToken.pointStop) {
       currentToken.y = currentToken.y + 20;
     }
     // If the token is placed below the bottom, sets it to the bottom of the grid
-    if (currentToken.y > height - 100){
+    if (currentToken.y > height - 100) {
       currentToken.y = height - 100;
     }
   }
@@ -81,20 +82,32 @@ int deterColumn(int x) {
   return center;
 }
 
-class Token{
+class Token {
   // A Token has a PShape and an x and y value
   PShape shape;
   int x;
   int y;
-  
+  int pointStop;
+
   // Each variable is set by the constructor
-  Token(PShape shape, int x, int y){
+  Token(PShape shape, int x, int y) {
     this.shape = shape;
     this.x = x;
     this.y = y;
   }
+
+  void stopPoint(int x) {
+    int gridCol = x / 100;
+    int stopPoint = height - 100;
+    for (int i = 0; i < 4; i++) {
+      if (gridFilled[i][gridCol]) {
+        stopPoint = (i + 1) * 100;
+      }
+    }
+    pointStop = stopPoint;
+  }
 }
-  
+
 // A Cell object
 class Cell {
   // A cell object knows about its location in the grid as well as its size with the variables x,y,w,h.
@@ -123,3 +136,4 @@ class Cell {
     shapeMode(CENTER);
   }
 }
+
