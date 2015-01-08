@@ -1,17 +1,20 @@
 // 2D Array of objects
 Cell[][] grid;
-String[][] gridFilled = new String[4][6];
+String[][] gridFilled = new String[6][7];
 // ArrayList of all tokens that have been placed
 ArrayList<Token> tokens = new ArrayList<Token>();
 int turn = 0;
 
 // Number of columns and rows in the grid
-int cols = 7;
-int rows = 5;
+int cols = 8;
+int rows = 7;
+
+// Whether a winner exists
+boolean isWinner = false;
 
 void drawGrid() {
   background(0);
-  size(700, 500, P2D);
+  size(800, 700, P2D);
   grid = new Cell[cols][rows];
   for (int i = 1; i < cols; i++) {
     for (int j = 1; j < rows; j++) {
@@ -46,7 +49,7 @@ void mousePressed() {
     tokens.add(token);
     turn++;
   }
-  // Checks if there is a winner for all spots on the grid
+  // Checks if there is a winner for any spot on the grid
   for (int i = 0; i < rows - 1; i++) {
     for (int j = 0; j < cols - 1; j++) {
       checkGrid(i, j);
@@ -72,41 +75,45 @@ void draw() {
 }
 
 // Goes in each possible direction to see if there are 4 tokens of the same color in a row
-void checkGrid(int row, int col){
-  checkGrid(row, col, 1, 0);
-  checkGrid(row, col, 0, 1);
-  checkGrid(row, col, 1, 1);
-  checkGrid(row, col, -1, 0);
-  checkGrid(row, col, 0, -1);
-  checkGrid(row, col, -1, -1);
-  checkGrid(row, col, 1, -1);
-  checkGrid(row, col, -1, 1);
+void checkGrid(int row, int col) {
+  if (!isWinner) {
+    checkGrid(row, col, 1, 0);
+    checkGrid(row, col, 0, 1);
+    checkGrid(row, col, 1, 1);
+    checkGrid(row, col, -1, 0);
+    checkGrid(row, col, 0, -1);
+    checkGrid(row, col, -1, -1);
+    checkGrid(row, col, 1, -1);
+    checkGrid(row, col, -1, 1);
+  }
 }
 
-void checkGrid(int row, int col, int dx, int dy){
+void checkGrid(int row, int col, int dx, int dy) {
   // Check if 4 spaces exist in the specified direction
-  if (!(row + dx * 4 < 0) && !(row + dx * 4 > 4) && !(col + dy * 4 < 0) && !(col + dy * 4 > 6) && !(gridFilled[row][col].equals(""))){
+  if (!isWinner && !(row + dx * 4 < 0) && !(row + dx * 4 > rows - 1) && !(col + dy * 4 < 0) && !(col + dy * 4 > cols - 1) && !(gridFilled[row][col].equals(""))) {
     boolean allRed = true;
     boolean allBlue = true;
-    for (int i = 0; i < 4; i++){
-      if (!gridFilled[row][col].equals("Red")){
+    for (int i = 0; i < 4; i++) {
+      if (!gridFilled[row][col].equals("Red")) {
         allRed = false;
       }
-      if (!gridFilled[row][col].equals("Blue")){
+      if (!gridFilled[row][col].equals("Blue")) {
         allBlue = false;
       }
       row += dx;
       col += dy;
     }
-    if (allRed){
+    if (allRed) {
       System.out.println("Red wins");
+      isWinner = true;
     }
-    if (allBlue){
+    if (allBlue) {
       System.out.println("Blue wins");
+      isWinner = true;
     }
   }
 }
-  
+
 int deterColumn(int x) {
   int center = 0;
   if ( x > 50 && x < 150) {
@@ -121,7 +128,8 @@ int deterColumn(int x) {
     center = 500;
   } else if ( x >= 550 && x < 650) {
     center = 600;
-  } else {
+  } else if ( x >= 650 && x < 750) {
+    center = 700;
   }
   return center;
 }
@@ -146,7 +154,7 @@ class Token {
     int gridCol = x / 100 - 1;
     int stopPoint = height - 100;
     int row = 0;
-    while (row < 4) {
+    while (row < rows - 1) {
       if (!gridFilled[row][gridCol].equals("")) {
         stopPoint = row * 100;
         break;
