@@ -34,7 +34,7 @@ void setup() {
 }
 
 void mousePressed() {
-  if (mouseX > 50 && mouseX < width - 50 && mouseY > 50 && mouseY < height - 50) {
+  if (mouseX > 50 && mouseX < width - 50 && mouseY > 50 && mouseY < height - 50 && !isWinner) {
     if ( turn % 2 == 0) {
       fill(255, 0, 0);
     } else {
