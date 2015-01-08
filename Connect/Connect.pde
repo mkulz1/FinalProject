@@ -34,25 +34,27 @@ void setup() {
 }
 
 void mousePressed() {
-  if ( turn % 2 == 0) {
-    fill(255, 0, 0);
-  } else {
-    fill(0, 0, 255);
-  }
-  // Creates a PShape as a token, which is more interactive than a regular ellipse
-  PShape shape = createShape(ELLIPSE, 0, 0, 90, 90);
-  // Adds the PShape to a new Token class
-  Token token = new Token(shape, deterColumn(mouseX), mouseY);
-  token.stopPoint(token.x);
-  // Adds the Token to the tokens ArrayList
-  if (token.isValidToken) {
-    tokens.add(token);
-    turn++;
-  }
-  // Checks if there is a winner for any spot on the grid
-  for (int i = 0; i < rows - 1; i++) {
-    for (int j = 0; j < cols - 1; j++) {
-      checkGrid(i, j);
+  if (mouseX > 50 && mouseX < width - 50 && mouseY > 50 && mouseY < height - 50) {
+    if ( turn % 2 == 0) {
+      fill(255, 0, 0);
+    } else {
+      fill(0, 0, 255);
+    }
+    // Creates a PShape as a token, which is more interactive than a regular ellipse
+    PShape shape = createShape(ELLIPSE, 0, 0, 90, 90);
+    // Adds the PShape to a new Token class
+    Token token = new Token(shape, deterColumn(mouseX), mouseY);
+    token.stopPoint(token.x);
+    // Adds the Token to the tokens ArrayList
+    if (token.isValidToken) {
+      tokens.add(token);
+      turn++;
+    }
+    // Checks if there is a winner for any spot on the grid
+    for (int i = 0; i < rows - 1; i++) {
+      for (int j = 0; j < cols - 1; j++) {
+        checkGrid(i, j);
+      }
     }
   }
 }
