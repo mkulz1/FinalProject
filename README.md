@@ -9,3 +9,8 @@ FinalProject
 -New Token class
 -Tokens alternate colors
 -Tokens fall to the bottom of the grid instead of being dragged
+
+1/7/15
+-Tokens pile inside the grid
+-Prints message if there are 4 in a row
+-Grid size increased
