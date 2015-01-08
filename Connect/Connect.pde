@@ -14,6 +14,8 @@ int rows = 7;
 boolean isWinner = false;
 boolean isRed = false;
 
+boolean isColorSelected = false;
+
 void drawGrid() {
   background(0);
   size(800, 700, P2D);
@@ -33,6 +35,10 @@ void setup() {
       gridFilled[i][j] = "";
     }
   }
+  fill(255);
+  strokeWeight(4);
+  stroke(0);
+  rect(400, 350, 350, 100);
   f = createFont("Arial", 24, true);
 }
 
@@ -63,7 +69,9 @@ void mousePressed() {
 }
 
 void draw() {
-  drawGrid();
+  if (isColorSelected){
+    drawGrid();
+  }
   // Goes through the ArrayList of tokens and displays them based on their current values
   for (int i = 0; i < tokens.size (); i++) {
     Token currentToken = tokens.get(i);
