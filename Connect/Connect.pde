@@ -30,14 +30,36 @@ void drawGrid() {
 }
 
 void drawWindow() {
+  rectMode(CENTER);
   fill(255);
   strokeWeight(4);
   stroke(0);
   rect(400, 350, 350, 100);
+  // Please Select Your Color
   f = createFont("Arial", 24, true);
-  textFont(f, 16);                
+  textFont(f, 24);                
   fill(0);                    
-  text("Please Select Your Color", 300, 320);
+  text("Please Select Your Color", 275, 325);
+  // Red Choice
+  fill(255, 0, 0);
+  strokeWeight(1);
+  stroke(0);
+  rect(330, 365, 100, 50);
+  // Red (word)
+  f = createFont("Arial", 24, true);
+  textFont(f, 24);                
+  fill(255);                    
+  text("Red", 310, 370);
+  // Blue Choice
+  fill(0, 0, 255);
+  strokeWeight(1);
+  stroke(0);
+  rect(460, 365, 100, 50);
+  // Blue (word)
+  f = createFont("Arial", 24, true);
+  textFont(f, 24);                
+  fill(255);                    
+  text("Blue", 438, 370);
 }
 void setup() { 
   drawGrid();
@@ -56,17 +78,26 @@ void mousePressed() {
     } else {
       fill(0, 0, 255);
     }
-    if (isColorSelected){
-    // Creates a PShape as a token, which is more interactive than a regular ellipse
-    PShape shape = createShape(ELLIPSE, 0, 0, 90, 90);
-    // Adds the PShape to a new Token class
-    Token token = new Token(shape, deterColumn(mouseX), mouseY);
-    token.stopPoint(token.x);
-    // Adds the Token to the tokens ArrayList
-    if (token.isValidToken) {
-      tokens.add(token);
-      turn++;
-    }
+    if (isColorSelected) {
+      // Creates a PShape as a token, which is more interactive than a regular ellipse
+      PShape shape = createShape(ELLIPSE, 0, 0, 90, 90);
+      // Adds the PShape to a new Token class
+      Token token = new Token(shape, deterColumn(mouseX), mouseY);
+      token.stopPoint(token.x);
+      // Adds the Token to the tokens ArrayList
+      if (token.isValidToken) {
+        tokens.add(token);
+        turn++;
+      }
+    } else {
+      if ( mouseX > 280 && mouseX < 380 && mouseY > 340 && mouseY < 390) {
+        // Red chosen
+        isColorSelected = true;
+      } else if (mouseX > 410 && mouseX < 510 && mouseY > 340 && mouseY < 390) {
+        // blue chosen
+        isColorSelected = true;
+      } else {
+      }
     }
     // Checks if there is a winner for any spot on the grid
     for (int i = 0; i < rows - 1; i++) {
