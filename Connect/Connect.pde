@@ -33,7 +33,7 @@ void setup() {
       gridFilled[i][j] = "";
     }
   }
-  f = createFont("Arial", 16, true);
+  f = createFont("Arial", 24, true);
 }
 
 void mousePressed() {
@@ -78,13 +78,13 @@ void draw() {
     }
   }
   if (isWinner && isRed) {
-    textFont(f, 16);                 // STEP 4 Specify font to be used
-    fill(255);                        // STEP 5 Specify font color 
-    text("Red Wins!", 250, 50);  // STEP 6 Display Text
+    textFont(f, 24); 
+    fill(255);                    
+    text("Red Wins!", 340, 35);
   } else if (isWinner && !isRed) {
-    textFont(f, 16);                 // STEP 4 Specify font to be used
-    fill(255);                        // STEP 5 Specify font color 
-    text("Blue Wins!", 250, 50);  // STEP 6 Display Text
+    textFont(f, 24);                
+    fill(255);                    
+    text("Blue Wins!", 340, 35);  
   } else {
   }
 }
