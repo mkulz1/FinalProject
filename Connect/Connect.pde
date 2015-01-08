@@ -4,6 +4,7 @@ String[][] gridFilled = new String[6][7];
 // ArrayList of all tokens that have been placed
 ArrayList<Token> tokens = new ArrayList<Token>();
 int turn = 0;
+PFont f; 
 
 // Number of columns and rows in the grid
 int cols = 8;
@@ -11,6 +12,7 @@ int rows = 7;
 
 // Whether a winner exists
 boolean isWinner = false;
+boolean isRed = false;
 
 void drawGrid() {
   background(0);
@@ -24,13 +26,14 @@ void drawGrid() {
     }
   }
 }
-void setup() {
+void setup() { 
   drawGrid();
   for (int i = 0; i < rows - 1; i++) {
     for (int j = 0; j < cols - 1; j++) {
       gridFilled[i][j] = "";
     }
   }
+  f = createFont("Arial", 16, true);
 }
 
 void mousePressed() {
@@ -74,134 +77,143 @@ void draw() {
       currentToken.y = currentToken.pointStop;
     }
   }
-}
-
-// Goes in each possible direction to see if there are 4 tokens of the same color in a row
-void checkGrid(int row, int col) {
-  if (!isWinner) {
-    checkGrid(row, col, 1, 0);
-    checkGrid(row, col, 0, 1);
-    checkGrid(row, col, 1, 1);
-    checkGrid(row, col, -1, 0);
-    checkGrid(row, col, 0, -1);
-    checkGrid(row, col, -1, -1);
-    checkGrid(row, col, 1, -1);
-    checkGrid(row, col, -1, 1);
+  if (isWinner && isRed) {
+    textFont(f, 16);                 // STEP 4 Specify font to be used
+    fill(255);                        // STEP 5 Specify font color 
+    text("Red Wins!", 250, 50);  // STEP 6 Display Text
+  } else if (isWinner && !isRed) {
+    textFont(f, 16);                 // STEP 4 Specify font to be used
+    fill(255);                        // STEP 5 Specify font color 
+    text("Blue Wins!", 250, 50);  // STEP 6 Display Text
+  } else {
   }
 }
 
-void checkGrid(int row, int col, int dx, int dy) {
-  // Check if 4 spaces exist in the specified direction
-  if (!isWinner && !(row + dx * 4 < 0) && !(row + dx * 4 > rows - 1) && !(col + dy * 4 < 0) && !(col + dy * 4 > cols - 1) && !(gridFilled[row][col].equals(""))) {
-    boolean allRed = true;
-    boolean allBlue = true;
-    for (int i = 0; i < 4; i++) {
-      if (!gridFilled[row][col].equals("Red")) {
-        allRed = false;
+  // Goes in each possible direction to see if there are 4 tokens of the same color in a row
+  void checkGrid(int row, int col) {
+    if (!isWinner) {
+      checkGrid(row, col, 1, 0);
+      checkGrid(row, col, 0, 1);
+      checkGrid(row, col, 1, 1);
+      checkGrid(row, col, -1, 0);
+      checkGrid(row, col, 0, -1);
+      checkGrid(row, col, -1, -1);
+      checkGrid(row, col, 1, -1);
+      checkGrid(row, col, -1, 1);
+    }
+  }
+
+  void checkGrid(int row, int col, int dx, int dy) {
+    // Check if 4 spaces exist in the specified direction
+    if (!isWinner && !(row + dx * 4 < 0) && !(row + dx * 4 > rows - 1) && !(col + dy * 4 < 0) && !(col + dy * 4 > cols - 1) && !(gridFilled[row][col].equals(""))) {
+      boolean allRed = true;
+      boolean allBlue = true;
+      for (int i = 0; i < 4; i++) {
+        if (!gridFilled[row][col].equals("Red")) {
+          allRed = false;
+        }
+        if (!gridFilled[row][col].equals("Blue")) {
+          allBlue = false;
+        }
+        row += dx;
+        col += dy;
       }
-      if (!gridFilled[row][col].equals("Blue")) {
-        allBlue = false;
+      if (allRed) {
+        isWinner = true;
+        isRed = true;
       }
-      row += dx;
-      col += dy;
-    }
-    if (allRed) {
-      System.out.println("Red wins");
-      isWinner = true;
-    }
-    if (allBlue) {
-      System.out.println("Blue wins");
-      isWinner = true;
-    }
-  }
-}
-
-int deterColumn(int x) {
-  int center = 0;
-  if ( x > 50 && x < 150) {
-    center = 100;
-  } else if ( x >= 150 && x < 250) {
-    center = 200;
-  } else if ( x >= 250 && x < 350) {
-    center = 300;
-  } else if ( x >= 350 && x < 450) {
-    center = 400;
-  } else if ( x >= 450 && x < 550) {
-    center = 500;
-  } else if ( x >= 550 && x < 650) {
-    center = 600;
-  } else if ( x >= 650 && x < 750) {
-    center = 700;
-  }
-  return center;
-}
-
-class Token {
-  // A Token has a PShape and an x and y value
-  PShape shape;
-  int x;
-  int y;
-  int pointStop;
-  // If the token is found to not be placed correctly, valid is set to false and the token is not added to the tokens arrayList
-  boolean isValidToken = true;
-
-  // Each variable is set by the constructor
-  Token(PShape shape, int x, int y) {
-    this.shape = shape;
-    this.x = x;
-    this.y = y;
-  }
-
-  void stopPoint(int x) {
-    int gridCol = x / 100 - 1;
-    int stopPoint = height - 100;
-    int row = 0;
-    while (row < rows - 1) {
-      if (!gridFilled[row][gridCol].equals("")) {
-        stopPoint = row * 100;
-        break;
+      if (allBlue) {
+        isWinner = true;
       }
-      row++;
     }
-    pointStop = stopPoint;
-    if (row > 0) {
-      if (turn % 2 == 0) {
-        gridFilled[row - 1][gridCol] = "Red";
+  }
+
+  int deterColumn(int x) {
+    int center = 0;
+    if ( x > 50 && x < 150) {
+      center = 100;
+    } else if ( x >= 150 && x < 250) {
+      center = 200;
+    } else if ( x >= 250 && x < 350) {
+      center = 300;
+    } else if ( x >= 350 && x < 450) {
+      center = 400;
+    } else if ( x >= 450 && x < 550) {
+      center = 500;
+    } else if ( x >= 550 && x < 650) {
+      center = 600;
+    } else if ( x >= 650 && x < 750) {
+      center = 700;
+    }
+    return center;
+  }
+
+  class Token {
+    // A Token has a PShape and an x and y value
+    PShape shape;
+    int x;
+    int y;
+    int pointStop;
+    // If the token is found to not be placed correctly, valid is set to false and the token is not added to the tokens arrayList
+    boolean isValidToken = true;
+
+    // Each variable is set by the constructor
+    Token(PShape shape, int x, int y) {
+      this.shape = shape;
+      this.x = x;
+      this.y = y;
+    }
+
+    void stopPoint(int x) {
+      int gridCol = x / 100 - 1;
+      int stopPoint = height - 100;
+      int row = 0;
+      while (row < rows - 1) {
+        if (!gridFilled[row][gridCol].equals("")) {
+          stopPoint = row * 100;
+          break;
+        }
+        row++;
+      }
+      pointStop = stopPoint;
+      if (row > 0) {
+        if (turn % 2 == 0) {
+          gridFilled[row - 1][gridCol] = "Red";
+        } else {
+          gridFilled[row - 1][gridCol] = "Blue";
+        }
       } else {
-        gridFilled[row - 1][gridCol] = "Blue";
+        isValidToken = false;
       }
-    } else {
-      isValidToken = false;
     }
   }
-}
 
-// A Cell object
-class Cell {
-  // A cell object knows about its location in the grid as well as its size with the variables x,y,w,h.
-  float x, y;   // x,y location
-  float w, h;   // width and height
-  boolean filled;
+  // A Cell object
+  class Cell {
+    // A cell object knows about its location in the grid as well as its size with the variables x,y,w,h.
+    float x, y;   // x,y location
+    float w, h;   // width and height
+    boolean filled;
 
-  // Cell Constructor
-  Cell(float tempX, float tempY, float tempW, float tempH) {
-    x = tempX;
-    y = tempY;
-    w = tempW;
-    h = tempH;
-    filled = false;
-  } 
+    // Cell Constructor
+    Cell(float tempX, float tempY, float tempW, float tempH) {
+      x = tempX;
+      y = tempY;
+      w = tempW;
+      h = tempH;
+      filled = false;
+    } 
 
 
-  void display() {
-    stroke(0);
-    fill(255, 255, 0);
-    rectMode(CENTER);
-    rect(x, y, w, h); 
-    stroke(255);
-    fill(255, 200, 40);
-    ellipse(x, y, 90, 90);
-    shapeMode(CENTER);
+    void display() {
+      stroke(0);
+      fill(255, 255, 0);
+      rectMode(CENTER);
+      rect(x, y, w, h); 
+      stroke(255);
+      fill(255, 200, 40);
+      ellipse(x, y, 90, 90);
+      shapeMode(CENTER);
+    }
   }
-}
 
