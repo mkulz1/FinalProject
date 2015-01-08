@@ -29,7 +29,7 @@ void drawGrid() {
   }
 }
 
-void drawWindow() {
+void drawWindow(int redColorTint, int blueColorTint) {
   rectMode(CENTER);
   fill(255);
   strokeWeight(4);
@@ -41,7 +41,7 @@ void drawWindow() {
   fill(0);                    
   text("Please Select Your Color", 275, 325);
   // Red Choice
-  fill(255, 0, 0);
+  fill(255, redColorTint, redColorTint);
   strokeWeight(1);
   stroke(0);
   rect(330, 365, 100, 50);
@@ -51,7 +51,7 @@ void drawWindow() {
   fill(255);                    
   text("Red", 310, 370);
   // Blue Choice
-  fill(0, 0, 255);
+  fill(blueColorTint, blueColorTint, 255);
   strokeWeight(1);
   stroke(0);
   rect(460, 365, 100, 50);
@@ -68,7 +68,7 @@ void setup() {
       gridFilled[i][j] = "";
     }
   }
-  drawWindow();
+  drawWindow(0, 0);
 }
 
 void mousePressed() {
@@ -96,6 +96,7 @@ void mousePressed() {
       } else if (mouseX > 410 && mouseX < 510 && mouseY > 340 && mouseY < 390) {
         // blue chosen
         isColorSelected = true;
+        turn++;
       } else {
       }
     }
@@ -111,6 +112,12 @@ void mousePressed() {
 void draw() {
   if (isColorSelected) {
     drawGrid();
+  }else if (mouseX > 280 && mouseX < 380 && mouseY > 340 && mouseY < 390){
+    drawWindow(80, 0);
+  }else if (mouseX > 410 && mouseX < 510 && mouseY > 340 && mouseY < 390){
+    drawWindow(0, 80);
+  }else{
+    drawWindow(0, 0);
   }
   // Goes through the ArrayList of tokens and displays them based on their current values
   for (int i = 0; i < tokens.size (); i++) {
