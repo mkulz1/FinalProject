@@ -35,6 +35,9 @@ void drawWindow() {
   stroke(0);
   rect(400, 350, 350, 100);
   f = createFont("Arial", 24, true);
+  textFont(f, 16);                
+  fill(0);                    
+  text("Please Select Your Color", 300, 320);
 }
 void setup() { 
   drawGrid();
