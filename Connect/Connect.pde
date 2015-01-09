@@ -37,11 +37,11 @@ void drawModeWindow(int selectionTint1, int selectionTint2) {
   fill(255);
   strokeWeight(4);
   stroke(0);
-  rect(400, 350, 350, 100);
+  rect(400, 350, 380, 100);
   f = createFont("Arial", 24, true);
   textFont(f, 24);                
   fill(0);                    
-  text("Please Select The Game Mode", 235, 325);
+  text("Please Select The Game Mode", 225, 325);
   fill(selectionTint1, selectionTint1, selectionTint1);
   strokeWeight(1);
   stroke(0);
@@ -133,9 +133,11 @@ void mousePressed() {
       if ( mouseX > 280 && mouseX < 380 && mouseY > 340 && mouseY < 390) {
         isModeSelected = true;
         is1Player = true;
+        drawGrid();
       } else if (mouseX > 410 && mouseX < 510 && mouseY > 340 && mouseY < 390) {
         isModeSelected = true;
         is2Players = true;
+        drawGrid();
       }
     }
     // Checks if there is a winner for any spot on the grid
