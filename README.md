@@ -14,3 +14,10 @@ FinalProject
 -Tokens pile inside the grid
 -Prints message if there are 4 in a row
 -Grid size increased
+
+1/8/15
+-Fixed placing of tokens after a winner exists
+-Winning color is displayed above grid
+-Added box to select player color
+-Added box to select whether there are 1 or 2 players
+
