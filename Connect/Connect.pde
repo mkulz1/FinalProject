@@ -1,10 +1,15 @@
 // 2D Array of objects
 Cell[][] grid;
 String[][] gridFilled = new String[6][7];
+int[][] gameBoard = new int[6][7];
+
 // ArrayList of all tokens that have been placed
 ArrayList<Token> tokens = new ArrayList<Token>();
-int turn = 0;
+int turn = 0; // even = red // odd = blue
 PFont f; 
+
+// gameBoard status
+// 0 = empty , 1 = player, 2 = computer
 
 // Number of columns and rows in the grid
 int cols = 8;
@@ -30,6 +35,13 @@ void drawGrid() {
       grid[i][j].display();
     }
   }
+}
+
+// gameBoard status
+// 0 = empty , 1 = player, 2 = computer
+void updateGame(int xcor, int ycor){
+  if( turn % 2 == 0){
+    
 }
 
 void drawModeWindow(int selectionTint1, int selectionTint2) {
@@ -256,6 +268,7 @@ class Token {
   PShape shape;
   int x;
   int y;
+  int boardX,boardY;
   int pointStop;
   // If the token is found to not be placed correctly, valid is set to false and the token is not added to the tokens arrayList
   boolean isValidToken = true;
@@ -319,4 +332,7 @@ class Cell {
     shapeMode(CENTER);
   }
 }
+
+
+  
 
