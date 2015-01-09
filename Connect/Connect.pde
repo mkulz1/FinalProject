@@ -14,6 +14,9 @@ int rows = 7;
 boolean isWinner = false;
 boolean isRed = false;
 
+boolean isModeSelected = false;
+boolean is1Player = false;
+boolean is2Players = false;
 boolean isColorSelected = false;
 
 void drawGrid() {
@@ -29,7 +32,35 @@ void drawGrid() {
   }
 }
 
-void drawWindow(int redColorTint, int blueColorTint) {
+void drawModeWindow(int selectionTint1, int selectionTint2) {
+  rectMode(CENTER);
+  fill(255);
+  strokeWeight(4);
+  stroke(0);
+  rect(400, 350, 350, 100);
+  f = createFont("Arial", 24, true);
+  textFont(f, 24);                
+  fill(0);                    
+  text("Please Select The Game Mode", 235, 325);
+  fill(selectionTint1, selectionTint1, selectionTint1);
+  strokeWeight(1);
+  stroke(0);
+  rect(330, 365, 110, 50);
+  f = createFont("Arial", 24, true);
+  textFont(f, 24);                
+  fill(255);                    
+  text("1 Player", 285, 370);
+  fill(selectionTint2, selectionTint2, selectionTint2);
+  strokeWeight(1);
+  stroke(0);
+  rect(460, 365, 110, 50);
+  f = createFont("Arial", 24, true);
+  textFont(f, 24);                
+  fill(255);                    
+  text("2 Players", 410, 370);
+}
+
+void drawColorWindow(int redColorTint, int blueColorTint) {
   rectMode(CENTER);
   fill(255);
   strokeWeight(4);
@@ -38,7 +69,7 @@ void drawWindow(int redColorTint, int blueColorTint) {
   // Please Select Your Color
   f = createFont("Arial", 24, true);
   textFont(f, 24);                
-  fill(0);                    
+  fill(0);
   text("Please Select Your Color", 275, 325);
   // Red Choice
   fill(255, redColorTint, redColorTint);
@@ -68,7 +99,7 @@ void setup() {
       gridFilled[i][j] = "";
     }
   }
-  drawWindow(0, 0);
+  drawModeWindow(100, 100);
 }
 
 void mousePressed() {
@@ -89,7 +120,7 @@ void mousePressed() {
         tokens.add(token);
         turn++;
       }
-    } else {
+    } else if (isModeSelected) {
       if ( mouseX > 280 && mouseX < 380 && mouseY > 340 && mouseY < 390) {
         // Red chosen
         isColorSelected = true;
@@ -97,7 +128,14 @@ void mousePressed() {
         // blue chosen
         isColorSelected = true;
         turn++;
-      } else {
+      }
+    } else {
+      if ( mouseX > 280 && mouseX < 380 && mouseY > 340 && mouseY < 390) {
+        isModeSelected = true;
+        is1Player = true;
+      } else if (mouseX > 410 && mouseX < 510 && mouseY > 340 && mouseY < 390) {
+        isModeSelected = true;
+        is2Players = true;
       }
     }
     // Checks if there is a winner for any spot on the grid
@@ -110,14 +148,22 @@ void mousePressed() {
 }
 
 void draw() {
-  if (isColorSelected) {
-    drawGrid();
-  }else if (mouseX > 280 && mouseX < 380 && mouseY > 340 && mouseY < 390){
-    drawWindow(80, 0);
-  }else if (mouseX > 410 && mouseX < 510 && mouseY > 340 && mouseY < 390){
-    drawWindow(0, 80);
-  }else{
-    drawWindow(0, 0);
+  if (isModeSelected) {
+    if (isColorSelected) {
+      drawGrid();
+    } else if (mouseX > 280 && mouseX < 380 && mouseY > 340 && mouseY < 390) {
+      drawColorWindow(80, 0);
+    } else if (mouseX > 410 && mouseX < 510 && mouseY > 340 && mouseY < 390) {
+      drawColorWindow(0, 80);
+    } else {
+      drawColorWindow(0, 0);
+    }
+  } else if (mouseX > 280 && mouseX < 380 && mouseY > 340 && mouseY < 390) {
+    drawModeWindow(150, 100);
+  } else if (mouseX > 410 && mouseX < 510 && mouseY > 340 && mouseY < 390) {
+    drawModeWindow(100, 150);
+  } else {
+    drawModeWindow(100, 100);
   }
   // Goes through the ArrayList of tokens and displays them based on their current values
   for (int i = 0; i < tokens.size (); i++) {
