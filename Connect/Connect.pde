@@ -23,6 +23,7 @@ boolean isModeSelected = false;
 boolean is1Player = false;
 boolean is2Players = false;
 boolean isColorSelected = false;
+boolean playerFirst = false;
 
 void setup() { 
   drawGrid();
@@ -32,6 +33,9 @@ void setup() {
     }
   }
   drawModeWindow(100, 100);
+  if (int(random(0,2)) == 0) {
+    playerFirst = true;
+  } 
 }
 
 void mousePressed() {
@@ -68,6 +72,7 @@ void mousePressed() {
       if ( mouseX > 280 && mouseX < 380 && mouseY > 340 && mouseY < 390) {
         isModeSelected = true;
         is1Player = true;
+        
         drawGrid();
       } else if (mouseX > 410 && mouseX < 510 && mouseY > 340 && mouseY < 390) {
         isModeSelected = true;
@@ -102,6 +107,7 @@ void draw() {
   } else {
     drawModeWindow(100, 100);
   }
+  
   // Goes through the ArrayList of tokens and displays them based on their current values
   for (int i = 0; i < tokens.size (); i++) {
     Token currentToken = tokens.get(i);
