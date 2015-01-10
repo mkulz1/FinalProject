@@ -39,9 +39,9 @@ void drawGrid() {
 
 // gameBoard status
 // 0 = empty , 1 = player, 2 = computer
-void updateGame(int xcor, int ycor){
-  if( turn % 2 == 0){
-    
+void updateGame(int xcor, int ycor) {
+  if ( turn % 2 == 0) {
+  }
 }
 
 void drawModeWindow(int selectionTint1, int selectionTint2) {
@@ -125,8 +125,9 @@ void mousePressed() {
       // Creates a PShape as a token, which is more interactive than a regular ellipse
       PShape shape = createShape(ELLIPSE, 0, 0, 90, 90);
       // Adds the PShape to a new Token class
-      Token token = new Token(shape, deterColumn(mouseX), mouseY);
+      Token token = new Token(shape, deterColumn(mouseX, false), mouseY);
       token.stopPoint(token.x);
+      token.boardLocation(token.x,token.pointStop);
       // Adds the Token to the tokens ArrayList
       if (token.isValidToken) {
         tokens.add(token);
@@ -186,7 +187,7 @@ void draw() {
     // Gradually lowers the y value if the token is not at the bottom
     if (currentToken.y < currentToken.pointStop) {
       currentToken.y = currentToken.y + 20;
-    }
+    } 
     // If the token is placed below the bottom, sets it to the bottom of the grid
     if (currentToken.y > currentToken.pointStop) {
       currentToken.y = currentToken.pointStop;
@@ -243,7 +244,7 @@ void checkGrid(int row, int col, int dx, int dy) {
   }
 }
 
-int deterColumn(int x) {
+int deterColumn(int x, boolean forToken) {
   int center = 0;
   if ( x > 50 && x < 150) {
     center = 100;
@@ -260,7 +261,29 @@ int deterColumn(int x) {
   } else if ( x >= 650 && x < 750) {
     center = 700;
   }
-  return center;
+  if (!forToken) {
+    return center;
+  } else {
+    return center/100;
+  }
+}
+
+int deterRow(int y) {
+  int yLoc = 0;
+  if ( y > 50 && y < 150) {
+    yLoc = 6;
+  } else if ( y >= 150 && y < 250) {
+    yLoc = 5;
+  } else if ( y >= 250 && y < 350) {
+    yLoc = 4;
+  } else if ( y >= 350 && y < 450) {
+    yLoc = 3;
+  } else if ( y >= 450 && y < 550) {
+    yLoc = 2;
+  } else if ( y >= 550 && y < 650) {
+    yLoc = 1;
+  } 
+  return yLoc;
 }
 
 class Token {
@@ -268,7 +291,7 @@ class Token {
   PShape shape;
   int x;
   int y;
-  int boardX,boardY;
+  int boardX, boardY;
   int pointStop;
   // If the token is found to not be placed correctly, valid is set to false and the token is not added to the tokens arrayList
   boolean isValidToken = true;
@@ -278,7 +301,15 @@ class Token {
     this.shape = shape;
     this.x = x;
     this.y = y;
+    this.boardX = deterColumn(x, true);
+    this.boardY = deterRow(y);
   }
+
+  void boardLocation(int x, int y) {
+    this.boardX = deterColumn(x, true);
+    this.boardY = deterRow(y);
+  }
+
 
   void stopPoint(int x) {
     int gridCol = x / 100 - 1;
@@ -320,7 +351,6 @@ class Cell {
     filled = false;
   } 
 
-
   void display() {
     stroke(0);
     fill(255, 255, 0);
@@ -332,7 +362,4 @@ class Cell {
     shapeMode(CENTER);
   }
 }
-
-
-  
 
