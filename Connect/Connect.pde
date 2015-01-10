@@ -8,7 +8,7 @@ ArrayList<Token> tokens = new ArrayList<Token>();
 int turn = 0; // even = red // odd = blue
 PFont f; 
 
-// gameBoard status
+// gameBoard status type
 // 0 = empty , 1 = player, 2 = computer
 
 // Number of columns and rows in the grid
@@ -39,10 +39,7 @@ void drawGrid() {
 
 // gameBoard status
 // 0 = empty , 1 = player, 2 = computer
-void updateGame(int xcor, int ycor) {
-  if ( turn % 2 == 0) {
-  }
-}
+
 
 void drawModeWindow(int selectionTint1, int selectionTint2) {
   rectMode(CENTER);
@@ -127,7 +124,9 @@ void mousePressed() {
       // Adds the PShape to a new Token class
       Token token = new Token(shape, deterColumn(mouseX, false), mouseY);
       token.stopPoint(token.x);
-      token.boardLocation(token.x,token.pointStop);
+      token.boardLocation(token.x, token.pointStop);
+      token.setGameBoard();
+
       // Adds the Token to the tokens ArrayList
       if (token.isValidToken) {
         tokens.add(token);
@@ -264,24 +263,24 @@ int deterColumn(int x, boolean forToken) {
   if (!forToken) {
     return center;
   } else {
-    return center/100;
+    return center/100 - 1;
   }
 }
 
 int deterRow(int y) {
   int yLoc = 0;
   if ( y > 50 && y < 150) {
-    yLoc = 6;
-  } else if ( y >= 150 && y < 250) {
     yLoc = 5;
-  } else if ( y >= 250 && y < 350) {
+  } else if ( y >= 150 && y < 250) {
     yLoc = 4;
-  } else if ( y >= 350 && y < 450) {
+  } else if ( y >= 250 && y < 350) {
     yLoc = 3;
-  } else if ( y >= 450 && y < 550) {
+  } else if ( y >= 350 && y < 450) {
     yLoc = 2;
-  } else if ( y >= 550 && y < 650) {
+  } else if ( y >= 450 && y < 550) {
     yLoc = 1;
+  } else if ( y >= 550 && y < 650) {
+    yLoc = 0;
   } 
   return yLoc;
 }
@@ -310,6 +309,13 @@ class Token {
     this.boardY = deterRow(y);
   }
 
+  void setGameBoard() {
+    if (turn % 2 == 0) {
+      gameBoard[this.boardX][this.boardY] = 1;
+    } else {
+      gameBoard[this.boardX][this.boardY] = 1;
+    }
+  }
 
   void stopPoint(int x) {
     int gridCol = x / 100 - 1;
