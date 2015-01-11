@@ -15,6 +15,8 @@ int goesOn = 1;
 // Whether the computer has made its first move (used to determine color)
 boolean compMoveMade = false;
 
+boolean playerCanMove = true;
+
 // gameBoard status type
 // 0 = empty , 1 = player, 2 = computer
 
@@ -46,7 +48,7 @@ void setup() {
 }
 
 void mousePressed() {
-  if (mouseX > 50 && mouseX < width - 50 && mouseY > 50 && mouseY < height - 50 && !isWinner) {
+  if (mouseX > 50 && mouseX < width - 50 && mouseY > 50 && mouseY < height - 50 && !isWinner && playerCanMove) {
     if ( turn % 2 == 0) {
       fill(255, 0, 0);
     } else {
@@ -65,6 +67,9 @@ void mousePressed() {
       if (token.isValidToken) {
         tokens.add(token);
         turn++;
+        if (is1Player) {
+          playerCanMove = false;
+        }
       }
     } else if (isModeSelected) {
       if ( mouseX > 280 && mouseX < 380 && mouseY > 340 && mouseY < 390) {
@@ -129,13 +134,21 @@ void draw() {
       currentToken.y = currentToken.pointStop;
     }
   }
-  if (is1Player && isColorSelected && !compMoveMade && !playerFirst) {
-    turn = goesOn;
-    comp.makeMove();
-    compMoveMade = true;
+  boolean allTokensAtBottom = true;
+  for (int i = 0; i < tokens.size (); i++) {
+    if (tokens.get(i).y < tokens.get(i).pointStop) {
+      allTokensAtBottom = false;
+    }
   }
-  if (is1Player && isColorSelected && turn % 2 == goesOn) {
-    comp.makeMove();
+  if (allTokensAtBottom) {
+    if (is1Player && isColorSelected && !compMoveMade && !playerFirst) {
+      turn = goesOn;
+      comp.makeMove();
+      compMoveMade = true;
+    }
+    if (is1Player && isColorSelected && turn % 2 == goesOn) {
+      comp.makeMove();
+    }
   }
   if (isWinner && isRed) {
     textFont(f, 24); 

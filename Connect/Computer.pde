@@ -9,19 +9,27 @@ class Computer {
   }
 
   void makeMove() {
-    if ( turn % 2 == 0) {
-      fill(255, 0, 0);
-    } else {
-      fill(0, 0, 255);
-    }
-    PShape shape = createShape(ELLIPSE, 0, 0, 90, 90);
-    Token token = new Token(shape, int(random(1, 8)) * 100, 100);
-    token.stopPoint(token.x);
-    token.boardLocation(token.x, token.pointStop);
-    token.setGameBoard();
-    if (token.isValidToken) {
-      tokens.add(token);
-      turn++;
+    if (!isWinner) {
+      if ( turn % 2 == 0) {
+        fill(255, 0, 0);
+      } else {
+        fill(0, 0, 255);
+      }
+      PShape shape = createShape(ELLIPSE, 0, 0, 90, 90);
+      Token token = new Token(shape, int(random(1, 8)) * 100, 100);
+      token.stopPoint(token.x);
+      token.boardLocation(token.x, token.pointStop);
+      token.setGameBoard();
+      if (token.isValidToken) {
+        tokens.add(token);
+        turn++;
+        playerCanMove = true;
+      }
+      for (int i = 0; i < rows - 1; i++) {
+        for (int j = 0; j < cols - 1; j++) {
+          checkGrid(i, j);
+        }
+      }
     }
   }
 }
