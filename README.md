@@ -21,3 +21,6 @@ FinalProject
 -Added box to select player color
 -Added box to select whether there are 1 or 2 players
 
+1/9/15
+-Fixed multiple window bug
+-Preparation within code for AI
