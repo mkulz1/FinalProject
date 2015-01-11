@@ -24,3 +24,7 @@ FinalProject
 1/9/15
 -Fixed multiple window bug
 -Preparation within code for AI
+
+1/10/15
+-Divided code into tabs
+-If "1 player" is selected, the computer makes a random move every other turn
