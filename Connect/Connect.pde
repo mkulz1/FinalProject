@@ -8,6 +8,9 @@ ArrayList<Token> tokens = new ArrayList<Token>();
 int turn = 0; // even = red // odd = blue
 PFont f; 
 
+// The computer
+Computer comp = new Computer(0);
+
 // gameBoard status type
 // 0 = empty , 1 = player, 2 = computer
 
@@ -120,6 +123,9 @@ void draw() {
     if (currentToken.y > currentToken.pointStop) {
       currentToken.y = currentToken.pointStop;
     }
+  }
+  if (is1Player && isColorSelected && ((playerFirst && turn % 2 == 1) || (!playerFirst && turn % 2 == 0))){
+    comp.makeMove();
   }
   if (isWinner && isRed) {
     textFont(f, 24); 
