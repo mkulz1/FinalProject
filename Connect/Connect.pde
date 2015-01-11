@@ -10,6 +10,10 @@ PFont f;
 
 // The computer
 Computer comp = new Computer(0);
+// 0 = computer goes on even turns, 1 = computer goes on odd turns
+int goesOn = 1;
+// Whether the computer has made its first move (used to determine color)
+boolean compMoveMade = false;
 
 // gameBoard status type
 // 0 = empty , 1 = player, 2 = computer
@@ -36,9 +40,9 @@ void setup() {
     }
   }
   drawModeWindow(100, 100);
-  if (int(random(0,2)) == 0) {
+  if (int(random(0, 2)) == 0) {
     playerFirst = true;
-  } 
+  }
 }
 
 void mousePressed() {
@@ -69,13 +73,14 @@ void mousePressed() {
       } else if (mouseX > 410 && mouseX < 510 && mouseY > 340 && mouseY < 390) {
         // blue chosen
         isColorSelected = true;
+        goesOn = 0;
         turn++;
       }
     } else {
       if ( mouseX > 280 && mouseX < 380 && mouseY > 340 && mouseY < 390) {
         isModeSelected = true;
         is1Player = true;
-        
+
         drawGrid();
       } else if (mouseX > 410 && mouseX < 510 && mouseY > 340 && mouseY < 390) {
         isModeSelected = true;
@@ -110,7 +115,7 @@ void draw() {
   } else {
     drawModeWindow(100, 100);
   }
-  
+
   // Goes through the ArrayList of tokens and displays them based on their current values
   for (int i = 0; i < tokens.size (); i++) {
     Token currentToken = tokens.get(i);
@@ -124,7 +129,12 @@ void draw() {
       currentToken.y = currentToken.pointStop;
     }
   }
-  if (is1Player && isColorSelected && ((playerFirst && turn % 2 == 1) || (!playerFirst && turn % 2 == 0))){
+  if (is1Player && isColorSelected && !compMoveMade && !playerFirst) {
+    turn = goesOn;
+    comp.makeMove();
+    compMoveMade = true;
+  }
+  if (is1Player && isColorSelected && turn % 2 == goesOn) {
     comp.makeMove();
   }
   if (isWinner && isRed) {
