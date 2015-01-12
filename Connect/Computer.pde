@@ -3,7 +3,10 @@ class Computer {
   // will use gameBoard as its reference.
 
   int difficulty = 0;
-
+  boolean firstMoveMade = false;
+  int nextX;
+  int nextY;
+  
   Computer(int difficulty) {
     this.difficulty = difficulty;
   }
@@ -16,10 +19,10 @@ class Computer {
         fill(0, 0, 255);
       }
       PShape shape = createShape(ELLIPSE, 0, 0, 90, 90);
-      Token token = new Token(shape, int(random(1, 8)) * 100, 100);
+      Token token = new Token(shape, determineX(), 100);
       token.stopPoint(token.x);
       token.boardLocation(token.x, token.pointStop);
-      token.setGameBoard();
+      token.setGameBoard(false);
       if (token.isValidToken) {
         tokens.add(token);
         turn++;
@@ -30,6 +33,15 @@ class Computer {
           checkGrid(i, j);
         }
       }
+    }
+  }
+  
+  int determineX(){
+    if (!firstMoveMade){
+      firstMoveMade = true;
+      return 400;
+    } else {
+      return int(random(1, 8)) * 100;
     }
   }
 }

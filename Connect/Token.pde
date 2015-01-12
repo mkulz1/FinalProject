@@ -22,8 +22,8 @@ class Token {
     this.boardY = deterRow(y);
   }
 
-  void setGameBoard() {
-    if (turn % 2 == 0) {
+  void setGameBoard(boolean isPlayer) {
+    if (isPlayer) {
       gameBoard[this.boardY][this.boardX] = 1;
     } else {
       gameBoard[this.boardY][this.boardX] = 2;

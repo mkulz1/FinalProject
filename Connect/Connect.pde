@@ -61,7 +61,7 @@ void mousePressed() {
       Token token = new Token(shape, deterColumn(mouseX, false), mouseY);
       token.stopPoint(token.x);
       token.boardLocation(token.x, token.pointStop);
-      token.setGameBoard();
+      token.setGameBoard(true);
 
       // Adds the Token to the tokens ArrayList
       if (token.isValidToken) {
