@@ -37,6 +37,33 @@ void checkGrid(int row, int col, int dx, int dy) {
   }
 }
 
+void check3Grid(int row, int col, int dx, int dy) {
+  if (!isWinner && !(row + dx * 4 < 0) && !(row + dx * 4 > rows - 1) && !(col + dy * 4 < 0) && !(col + dy * 4 > cols - 1) {
+    boolean allPlayer = true;
+    for (int i = 0; i < 4; i++) {
+      if (i < 3) {
+        if (gameBoard[row][col] != 1) {
+          allPlayer = false;
+        }
+      }
+      if (i == 3) {
+        if (gameBoard[row][col] != 0) {
+          allPlayer = false;
+        }
+        if (gameBoard[row - 1][col] == 0) {
+          allPlayer = false;
+        }
+      }
+      row += dx;
+      col += dy;
+    }
+    if (allPlayer) {
+      nextX = col;
+      nextY = row;
+    }
+  }
+}
+
 int deterColumn(int x, boolean forToken) {
   int center = 0;
   if ( x > 50 && x < 150) {
@@ -78,3 +105,4 @@ int deterRow(int y) {
   } 
   return yLoc;
 }
+
