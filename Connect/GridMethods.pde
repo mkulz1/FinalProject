@@ -55,7 +55,7 @@ void check3Grid(int row, int col, int dx, int dy) {
     boolean allPlayer = true;
     for (int i = 0; i < 4; i++) {
       if (i < 3) {
-        if (gameBoard[row][col] != 1) {
+        if (gameBoard[row][col] != 1 && gameBoard[row][col] != 2) {
           allPlayer = false;
         }
       }
