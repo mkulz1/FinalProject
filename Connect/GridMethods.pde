@@ -76,6 +76,11 @@ void check3Grid(int row, int col, int dx, int dy, int c) {
     }
     if (allPlayer1) {
       comp.nextX = col;
+      if (c == 2) {
+          isWinningMove = true;
+           fill(0);
+          rect(100,100,500,400);
+        }
     } else {
       row = origRow;
       col = origCol;
@@ -108,6 +113,9 @@ void check3Grid(int row, int col, int dx, int dy, int c) {
       }
       if (allPlayer2) {
         comp.nextX = rightCol;
+        if ( c == 2) {
+          isWinningMove = true;
+        }
       }
     }
   }
