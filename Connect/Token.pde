@@ -45,7 +45,6 @@ class Token {
     if (row > 0) {
       if (turn % 2 == 0) {
         gridFilled[row - 1][gridCol] = "Red";
-       // gameBoard[row - 1][gridCol]
       } else {
         gridFilled[row - 1][gridCol] = "Blue";
       }

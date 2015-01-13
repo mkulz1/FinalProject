@@ -37,8 +37,21 @@ void checkGrid(int row, int col, int dx, int dy) {
   }
 }
 
+void check3Grid(int row, int col) {
+  if (!isWinner) {
+    check3Grid(row, col, 1, 0);
+    check3Grid(row, col, 0, 1);
+    check3Grid(row, col, 1, 1);
+    check3Grid(row, col, -1, 0);
+    check3Grid(row, col, 0, -1);
+    check3Grid(row, col, -1, -1);
+    check3Grid(row, col, 1, -1);
+    check3Grid(row, col, -1, 1);
+  }
+}
+
 void check3Grid(int row, int col, int dx, int dy) {
-  if (!isWinner && !(row + dx * 4 < 0) && !(row + dx * 4 > rows - 1) && !(col + dy * 4 < 0) && !(col + dy * 4 > cols - 1) {
+  if (!isWinner && !(row + dx * 4 < 0) && !(row + dx * 4 > rows - 1) && !(col + dy * 4 < 0) && !(col + dy * 4 > cols - 1)) {
     boolean allPlayer = true;
     for (int i = 0; i < 4; i++) {
       if (i < 3) {
@@ -50,16 +63,17 @@ void check3Grid(int row, int col, int dx, int dy) {
         if (gameBoard[row][col] != 0) {
           allPlayer = false;
         }
-        if (gameBoard[row - 1][col] == 0) {
+        if (row == 0 || gameBoard[row - 1][col] == 0) {
           allPlayer = false;
         }
       }
-      row += dx;
-      col += dy;
+      if (i < 3){
+        row += dx;
+        col += dy;
+      }
     }
     if (allPlayer) {
-      nextX = col;
-      nextY = row;
+      comp.nextX = col;
     }
   }
 }

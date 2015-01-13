@@ -143,11 +143,11 @@ void draw() {
   if (allTokensAtBottom) {
     if (is1Player && isColorSelected && !compMoveMade && !playerFirst) {
       turn = goesOn;
-      comp.makeMove();
+      comp.makeMove(false);
       compMoveMade = true;
     }
     if (is1Player && isColorSelected && turn % 2 == goesOn) {
-      comp.makeMove();
+      comp.makeMove(false);
     }
   }
   if (isWinner && isRed) {
