@@ -28,3 +28,7 @@ FinalProject
 1/10/15
 -Divided code into tabs
 -If "1 player" is selected, the computer makes a random move every other turn
+
+1/11/15
+-Computer bug fixes
+-Added delay between when the player places tokens and when the computer places tokens
