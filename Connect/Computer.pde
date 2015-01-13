@@ -55,22 +55,31 @@ class Computer {
       return int(random(1, 8)) * 100;
     }
   }
+  
+  void checkWin(){
+    
+  }
 
   void checkMAte() {
-    if (gameBoard[0][3] == 1 && gameBoard[0][2] == 1) {
+    if (gameBoard[0][2] == 0) {
+      comp.nextX = 2;
+    } else if (gameBoard[0][4] == 0) {
+      comp.nextX = 4;
+    } else if (gameBoard[0][3] == 1 && gameBoard[0][2] == 1) {
       comp.nextX = 4;
     } else if (gameBoard[0][3] == 1 && gameBoard[0][4] == 1) {
       comp.nextX = 2;
     }
   }
 
-  void checkIf3() {
-    for (int i = 0; i < rows - 1; i++) {
-      for (int j = 0; j < cols - 1; j++) {
-        check3Grid(i, j);
-        checkMAte();
+
+    void checkIf3() {
+      for (int i = 0; i < rows - 1; i++) {
+        for (int j = 0; j < cols - 1; j++) {
+          check3Grid(i, j);
+          checkMAte();
+        }
       }
     }
   }
-}
 
