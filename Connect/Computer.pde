@@ -19,7 +19,7 @@ class Computer {
       }
       PShape shape = createShape(ELLIPSE, 0, 0, 90, 90);
       Token token;
-      if (!isRandomX){
+      if (!isRandomX) {
         token = new Token(shape, determineX(), 100);
       } else {
         token = new Token(shape, int(random(1, 8)) * 100, 100);
@@ -47,7 +47,7 @@ class Computer {
     if (!firstMoveMade) {
       firstMoveMade = true;
       return 400;
-    } else if (nextX != -1){
+    } else if (nextX != -1) {
       int temp = nextX;
       nextX = -1;
       return (temp + 1) * 100;
@@ -56,10 +56,19 @@ class Computer {
     }
   }
 
+  void checkMAte() {
+    if (gameBoard[0][3] == 1 && gameBoard[0][2] == 1) {
+      comp.nextX = 4;
+    } else if (gameBoard[0][3] == 1 && gameBoard[0][4] == 1) {
+      comp.nextX = 2;
+    }
+  }
+
   void checkIf3() {
     for (int i = 0; i < rows - 1; i++) {
       for (int j = 0; j < cols - 1; j++) {
         check3Grid(i, j);
+        checkMAte();
       }
     }
   }
