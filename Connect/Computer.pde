@@ -76,7 +76,8 @@ class Computer {
     void checkIf3() {
       for (int i = 0; i < rows - 1; i++) {
         for (int j = 0; j < cols - 1; j++) {
-          check3Grid(i, j);
+          check3Grid(i,j, 2); // First takes the move that will win, offense 
+          check3Grid(i, j, 1); // Then defends
           checkMAte();
         }
       }

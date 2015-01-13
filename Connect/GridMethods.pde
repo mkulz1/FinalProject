@@ -37,27 +37,27 @@ void checkGrid(int row, int col, int dx, int dy) {
   }
 }
 
-void check3Grid(int row, int col) {
+void check3Grid(int row, int col, int c) {
   if (!isWinner) {
-    check3Grid(row, col, 1, 0);
-    check3Grid(row, col, 0, 1);
-    check3Grid(row, col, 1, 1);
-    check3Grid(row, col, -1, 0);
-    check3Grid(row, col, 0, -1);
-    check3Grid(row, col, -1, -1);
-    check3Grid(row, col, 1, -1);
-    check3Grid(row, col, -1, 1);
+    check3Grid(row, col, 1, 0, c);
+    check3Grid(row, col, 0, 1, c);
+    check3Grid(row, col, 1, 1, c);
+    check3Grid(row, col, -1, 0, c);
+    check3Grid(row, col, 0, -1, c);
+    check3Grid(row, col, -1, -1, c);
+    check3Grid(row, col, 1, -1, c);
+    check3Grid(row, col, -1, 1, c);
   }
 }
 
-void check3Grid(int row, int col, int dx, int dy) {
+void check3Grid(int row, int col, int dx, int dy, int c) {
   int origRow = row;
   int origCol = col;
   if (!isWinner && !(row + dx * 4 < 0) && !(row + dx * 4 > rows - 1) && !(col + dy * 4 < 0) && !(col + dy * 4 > cols - 1)) {
     boolean allPlayer1 = true;
     for (int i = 0; i < 4; i++) {
       if (i < 3) {
-        if (gameBoard[row][col] != 1) {
+        if (gameBoard[row][col] != c) {
           allPlayer1 = false;
         }
       }
@@ -83,7 +83,7 @@ void check3Grid(int row, int col, int dx, int dy) {
       boolean allPlayer2 = true;
       for (int i = 0; i < 4; i++) {
         if (i < 2) {
-          if (gameBoard[row][col] != 1) {
+          if (gameBoard[row][col] != c) {
             allPlayer2 = false;
           }
         }
@@ -97,7 +97,7 @@ void check3Grid(int row, int col, int dx, int dy) {
           rightCol = col;
         }
         if (i == 3) {
-          if (gameBoard[row][col] != 1) {
+          if (gameBoard[row][col] != c) {
             allPlayer2 = false;
           }
         }
