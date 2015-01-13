@@ -51,29 +51,64 @@ void check3Grid(int row, int col) {
 }
 
 void check3Grid(int row, int col, int dx, int dy) {
+  int origRow = row;
+  int origCol = col;
   if (!isWinner && !(row + dx * 4 < 0) && !(row + dx * 4 > rows - 1) && !(col + dy * 4 < 0) && !(col + dy * 4 > cols - 1)) {
-    boolean allPlayer = true;
+    boolean allPlayer1 = true;
     for (int i = 0; i < 4; i++) {
       if (i < 3) {
-        if (gameBoard[row][col] != 1 && gameBoard[row][col] != 2) {
-          allPlayer = false;
+        if (gameBoard[row][col] != 1) {
+          allPlayer1 = false;
         }
       }
       if (i == 3) {
         if (gameBoard[row][col] != 0) {
-          allPlayer = false;
+          allPlayer1 = false;
         }
         if (row == 0 || gameBoard[row - 1][col] == 0) {
-          allPlayer = false;
+          allPlayer1 = false;
         }
       }
-      if (i < 3){
+      if (i < 3) {
         row += dx;
         col += dy;
       }
     }
-    if (allPlayer) {
+    if (allPlayer1) {
       comp.nextX = col;
+    } else {
+      row = origRow;
+      col = origCol;
+      int rightCol = -1;
+      boolean allPlayer2 = true;
+      for (int i = 0; i < 4; i++) {
+        if (i < 2) {
+          if (gameBoard[row][col] != 1) {
+            allPlayer2 = false;
+          }
+        }
+        if (i == 2) {
+          if (gameBoard[row][col] != 0) {
+            allPlayer2 = false;
+          }
+          if (row == 0 || gameBoard[row - 1][col] == 0) {
+            allPlayer2 = false;
+          }
+          rightCol = col;
+        }
+        if (i == 3) {
+          if (gameBoard[row][col] != 1) {
+            allPlayer2 = false;
+          }
+        }
+        if (i < 3) {
+          row += dx;
+          col += dy;
+        }
+      }
+      if (allPlayer2) {
+        comp.nextX = rightCol;
+      }
     }
   }
 }
