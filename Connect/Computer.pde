@@ -46,7 +46,13 @@ class Computer {
     checkIf3();
     if (!firstMoveMade) {
       firstMoveMade = true;
-      return 400;
+      if (gameBoard[0][1] == 1) {
+        return 300;
+      } else if (gameBoard[0][5] == 1) {
+        return 500;
+      } else {
+        return 400;
+      }
     } else if (nextX != -1) {
       int temp = nextX;
       nextX = -1;
@@ -55,7 +61,7 @@ class Computer {
       return int(random(1, 8)) * 100;
     }
   }
-  
+
 
   void checkMAte() {
     if (gameBoard[0][2] == 0) {
@@ -70,17 +76,16 @@ class Computer {
   }
 
 
-    void checkIf3() {
-      for (int i = 0; i < rows - 1; i++) {
-        for (int j = 0; j < cols - 1; j++) {
-          check3Grid(i,j, 2); // First takes the move that will win, offense 
-          if(!isWinningMove){
-            check3Grid(i, j, 1); // Then defends
-                  checkMAte();
-          }
-         
+  void checkIf3() {
+    for (int i = 0; i < rows - 1; i++) {
+      for (int j = 0; j < cols - 1; j++) {
+        check3Grid(i, j, 2); // First takes the move that will win, offense 
+        if (!isWinningMove) {
+          check3Grid(i, j, 1); // Then defends
+          checkMAte();
         }
       }
     }
   }
+}
 
