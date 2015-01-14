@@ -73,6 +73,8 @@ class Computer {
       comp.nextX = 4;
     } else if (gameBoard[0][3] == 1 && gameBoard[0][4] == 1 && gameBoard[0][2] == 0) {
       comp.nextX = 2;
+    } else if (gameBoard[0][0] == 0 && gameBoard[0][1] == 1 && gameBoard[0][2] == 1 && gameBoard[0][3] == 1){
+      comp.nextX = 0;
     }
   }
 
