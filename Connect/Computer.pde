@@ -5,6 +5,7 @@ class Computer {
   int difficulty = 0;
   boolean firstMoveMade = false;
   int nextX = -1;
+  int playerWinX = -1; 
 
   Computer(int difficulty) {
     this.difficulty = difficulty;
@@ -80,13 +81,13 @@ class Computer {
     // Looks to defend first
     for (int i = 0; i < rows - 1; i++) {
       for (int j = 0; j < cols - 1; j++) {
-        check3Grid(i, j, 1);
+        check3Grid(i, j, 1, false);
       }
     }
     // If it can win, then the nextX is overwritten 
     for (int i = 0; i < rows - 1; i++) {
       for (int j = 0; j < cols - 1; j++) {
-        check3Grid(i, j, 2);
+        check3Grid(i, j, 2, false);
       }
     }
   }

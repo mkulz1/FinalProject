@@ -37,20 +37,20 @@ void checkGrid(int row, int col, int dx, int dy) {
   }
 }
 
-void check3Grid(int row, int col, int c) {
+void check3Grid(int row, int col, int c, boolean isFuture) {
   if (!isWinner) {
-    check3Grid(row, col, 1, 0, c);
-    check3Grid(row, col, 0, 1, c);
-    check3Grid(row, col, 1, 1, c);
-    check3Grid(row, col, -1, 0, c);
-    check3Grid(row, col, 0, -1, c);
-    check3Grid(row, col, -1, -1, c);
-    check3Grid(row, col, 1, -1, c);
-    check3Grid(row, col, -1, 1, c);
+    check3Grid(row, col, 1, 0, c, isFuture);
+    check3Grid(row, col, 0, 1, c, isFuture);
+    check3Grid(row, col, 1, 1, c, isFuture);
+    check3Grid(row, col, -1, 0, c, isFuture);
+    check3Grid(row, col, 0, -1, c, isFuture);
+    check3Grid(row, col, -1, -1, c, isFuture);
+    check3Grid(row, col, 1, -1, c, isFuture);
+    check3Grid(row, col, -1, 1, c, isFuture);
   }
 }
 
-void check3Grid(int row, int col, int dx, int dy, int c) {
+void check3Grid(int row, int col, int dx, int dy, int c, boolean isFuture) {
   int origRow = row;
   int origCol = col;
   if (!isWinner && !(row + dx * 3 < 0) && !(row + dx * 3 > rows - 2) && !(col + dy * 3 < 0) && !(col + dy * 3 > cols - 2)) {
@@ -75,7 +75,11 @@ void check3Grid(int row, int col, int dx, int dy, int c) {
       }
     }
     if (allPlayer1) {
-      comp.nextX = col;
+      if (isFuture) {
+        comp.playerWinX = col;
+      } else {
+        comp.nextX = col;
+      }
     } else {
       row = origRow;
       col = origCol;
@@ -106,8 +110,12 @@ void check3Grid(int row, int col, int dx, int dy, int c) {
           col += dy;
         }
       }
-      if (allPlayer2) {
-        comp.nextX = rightCol;
+      if (isFuture) {
+        if (isFuture) {
+          comp.playerWinX = col;
+        } else {
+          comp.nextX = col;
+        }
       }
     }
   }
