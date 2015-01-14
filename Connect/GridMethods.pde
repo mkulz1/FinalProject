@@ -65,7 +65,7 @@ void check3Grid(int row, int col, int dx, int dy, int c) {
         if (gameBoard[row][col] != 0) {
           allPlayer1 = false;
         }
-        if (row == 0 || gameBoard[row - 1][col] == 0) {
+        if (row != 0 && gameBoard[row - 1][col] != 0) {
           allPlayer1 = false;
         }
       }
@@ -77,10 +77,8 @@ void check3Grid(int row, int col, int dx, int dy, int c) {
     if (allPlayer1) {
       comp.nextX = col;
       if (c == 2) {
-          isWinningMove = true;
-           fill(0);
-          rect(100,100,500,400);
-        }
+        isWinningMove = true;
+      }
     } else {
       row = origRow;
       col = origCol;
@@ -96,7 +94,7 @@ void check3Grid(int row, int col, int dx, int dy, int c) {
           if (gameBoard[row][col] != 0) {
             allPlayer2 = false;
           }
-          if (row == 0 || gameBoard[row - 1][col] == 0) {
+          if (row != 0 && gameBoard[row - 1][col] != 0) {
             allPlayer2 = false;
           }
           rightCol = col;
@@ -121,45 +119,45 @@ void check3Grid(int row, int col, int dx, int dy, int c) {
   }
 }
 
-int deterColumn(int x, boolean forToken) {
-  int center = 0;
-  if ( x > 50 && x < 150) {
-    center = 100;
-  } else if ( x >= 150 && x < 250) {
-    center = 200;
-  } else if ( x >= 250 && x < 350) {
-    center = 300;
-  } else if ( x >= 350 && x < 450) {
-    center = 400;
-  } else if ( x >= 450 && x < 550) {
-    center = 500;
-  } else if ( x >= 550 && x < 650) {
-    center = 600;
-  } else if ( x >= 650 && x < 750) {
-    center = 700;
+  int deterColumn(int x, boolean forToken) {
+    int center = 0;
+    if ( x > 50 && x < 150) {
+      center = 100;
+    } else if ( x >= 150 && x < 250) {
+      center = 200;
+    } else if ( x >= 250 && x < 350) {
+      center = 300;
+    } else if ( x >= 350 && x < 450) {
+      center = 400;
+    } else if ( x >= 450 && x < 550) {
+      center = 500;
+    } else if ( x >= 550 && x < 650) {
+      center = 600;
+    } else if ( x >= 650 && x < 750) {
+      center = 700;
+    }
+    if (!forToken) {
+      return center;
+    } else {
+      return center/100 - 1;
+    }
   }
-  if (!forToken) {
-    return center;
-  } else {
-    return center/100 - 1;
-  }
-}
 
-int deterRow(int y) {
-  int yLoc = 0;
-  if ( y > 50 && y < 150) {
-    yLoc = 5;
-  } else if ( y >= 150 && y < 250) {
-    yLoc = 4;
-  } else if ( y >= 250 && y < 350) {
-    yLoc = 3;
-  } else if ( y >= 350 && y < 450) {
-    yLoc = 2;
-  } else if ( y >= 450 && y < 550) {
-    yLoc = 1;
-  } else if ( y >= 550 && y < 650) {
-    yLoc = 0;
-  } 
-  return yLoc;
-}
+  int deterRow(int y) {
+    int yLoc = 0;
+    if ( y > 50 && y < 150) {
+      yLoc = 5;
+    } else if ( y >= 150 && y < 250) {
+      yLoc = 4;
+    } else if ( y >= 250 && y < 350) {
+      yLoc = 3;
+    } else if ( y >= 350 && y < 450) {
+      yLoc = 2;
+    } else if ( y >= 450 && y < 550) {
+      yLoc = 1;
+    } else if ( y >= 550 && y < 650) {
+      yLoc = 0;
+    } 
+    return yLoc;
+  }
 
