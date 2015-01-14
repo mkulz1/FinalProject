@@ -32,3 +32,7 @@ FinalProject
 1/11/15
 -Computer bug fixes
 -Added delay between when the player places tokens and when the computer places tokens
+
+1/12/15
+-Computer can now make decisions based on current board
+-Computer blocks player if the player has 3 tokens in a row
