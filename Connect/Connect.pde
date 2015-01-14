@@ -14,7 +14,6 @@ Computer comp = new Computer(0);
 int goesOn = 1;
 // Whether the computer has made its first move (used to determine color)
 boolean compMoveMade = false;
-boolean isWinningMove = false;
 
 boolean playerCanMove = true;
 

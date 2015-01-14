@@ -76,18 +76,17 @@ class Computer {
     }
   }
 
-
   void checkIf3() {
+    // Looks to defend first
     for (int i = 0; i < rows - 1; i++) {
       for (int j = 0; j < cols - 1; j++) {
-        check3Grid(i, j, 2); // First takes the move that will win, offense
+        check3Grid(i, j, 1);
       }
     }
-    if (!isWinningMove) {
-      for (int i = 0; i < rows - 1; i++) {
-        for (int j = 0; j < cols - 1; j++) {
-          check3Grid(i, j, 1); // Then defends
-        }
+    // If it can win, then the nextX is overwritten 
+    for (int i = 0; i < rows - 1; i++) {
+      for (int j = 0; j < cols - 1; j++) {
+        check3Grid(i, j, 2);
       }
     }
   }
