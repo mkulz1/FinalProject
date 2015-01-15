@@ -151,14 +151,17 @@ void draw() {
     }
   }
   if (isWinner && isRed) {
-    textFont(f, 24); 
-    fill(255);                    
-    text("Red Wins!", 340, 35);
+    if (mouseX > 333 && mouseX < 463 && mouseY > 340 && mouseY < 390){
+      drawWinnerWindow("Red", 150);
+    } else {
+      drawWinnerWindow("Red", 100);
+    }
   } else if (isWinner && !isRed) {
-    textFont(f, 24);                
-    fill(255);                    
-    text("Blue Wins!", 340, 35);
-  } else {
+    if (mouseX > 333 && mouseX < 463 && mouseY > 340 && mouseY < 390){
+      drawWinnerWindow("Blue", 150);
+    } else {
+      drawWinnerWindow("Blue", 100);
+    }
   }
 }
 

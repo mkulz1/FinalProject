@@ -11,10 +11,6 @@ void drawGrid() {
   }
 }
 
-// gameBoard status
-// 0 = empty , 1 = player, 2 = computer
-
-
 void drawModeWindow(int selectionTint1, int selectionTint2) {
   rectMode(CENTER);
   fill(255);
@@ -74,4 +70,24 @@ void drawColorWindow(int redColorTint, int blueColorTint) {
   textFont(f, 24);                
   fill(255);                    
   text("Blue", 438, 370);
+}
+
+void drawWinnerWindow(String winner, int selectionTint) {
+  rectMode(CENTER);
+  fill(255);
+  strokeWeight(4);
+  stroke(0);
+  rect(400, 350, 200, 100);
+  f = createFont("Arial", 24, true);
+  textFont(f, 24);                
+  fill(0);                    
+  text(winner + " Wins!", 343, 325);
+  fill(selectionTint, selectionTint, selectionTint);
+  strokeWeight(1);
+  stroke(0);
+  rect(398, 365, 130, 50);
+  f = createFont("Arial", 24, true);
+  textFont(f, 24);                
+  fill(255);                    
+  text("Play Again", 342, 370);
 }
