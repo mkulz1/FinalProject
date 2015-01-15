@@ -5,7 +5,9 @@ class Computer {
   int difficulty = 0;
   boolean firstMoveMade = false;
   int nextX = -1;
+  int pursueX = -1;
   int playerWinX = -1; 
+  ArrayList<Integer> invalidCols = new ArrayList<Integer>();
 
   Computer(int difficulty) {
     this.difficulty = difficulty;
@@ -60,7 +62,7 @@ class Computer {
       nextX = -1;
       return (temp + 1) * 100;
     } else {
-      return int(random(1, 8)) * 100;
+      return pickRandomX();
     }
   }
 
@@ -80,7 +82,7 @@ class Computer {
   void checkIf3() {
     for (int i = 0; i < rows - 1; i++) {
       for (int j = 0; j < cols - 1; j++) {
-       pursue(i, j);
+        pursue(i, j);
       }
     }
     // Looks to defend first, overrides pursuit
@@ -93,6 +95,46 @@ class Computer {
     for (int i = 0; i < rows - 1; i++) {
       for (int j = 0; j < cols - 1; j++) {
         check3Grid(i, j, 2, false);
+      }
+    }
+  }
+
+  int pickRandomX() {
+    int randomX = -1;
+    if (invalidCols.size() == 7) {
+      invalidCols.clear();
+      if (pursueX != -1){
+        randomX = pursueX;
+        pursueX = -1;
+      } else {
+        randomX = int(random(7));
+      }
+      return (randomX + 1) * 100;
+    } else {
+      randomX = int(random(7));
+    }
+    int stopY = deterStopY(randomX);
+    if (stopY > 5) {
+      if (!invalidCols.contains(randomX)) {
+        invalidCols.add(randomX);
+      }
+      return pickRandomX();
+    } else {
+      gameBoard[stopY][randomX] = 2;
+      for (int i = 0; i < rows - 1; i++) {
+        for (int j = 0; j < cols - 1; j++) {
+          check3Grid(i, j, 1, true);
+        }
+      }
+      gameBoard[stopY][randomX] = 0;
+      if (playerWinX == -1) {
+        return (randomX + 1) * 100;
+      } else {
+        playerWinX = -1;
+        if (!invalidCols.contains(randomX)) {
+          invalidCols.add(randomX);
+        }
+        return pickRandomX();
       }
     }
   }

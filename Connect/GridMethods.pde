@@ -37,7 +37,9 @@ void pursue(int row, int col, int dx, int dy) {
     } else {
       canPursue = false;
     }
-    comp.nextX = (col + (dy*2) - 1);
+    if (canPursue){
+      comp.pursueX = (col + (dy*2) - 1);
+    }
   }
 }
 
@@ -140,11 +142,11 @@ void check3Grid(int row, int col, int dx, int dy, int c, boolean isFuture) {
           col += dy;
         }
       }
-      if (isFuture) {
+      if (allPlayer2) {
         if (isFuture) {
-          comp.playerWinX = col;
+          comp.playerWinX = rightCol;
         } else {
-          comp.nextX = col;
+          comp.nextX = rightCol;
         }
       }
     }
@@ -191,5 +193,15 @@ int deterRow(int y) {
     yLoc = 0;
   } 
   return yLoc;
+}
+
+int deterStopY(int x) {
+  int stopY = 6;
+  for (int i = 5; i >= 0; i--) {
+    if (gameBoard[i][x] == 0) {
+      stopY = i;
+    }
+  }
+  return stopY;
 }
 
