@@ -2,6 +2,8 @@
 Cell[][] grid;
 String[][] gridFilled = new String[6][7];
 int[][] gameBoard = new int[6][7];
+int[] topOpen = new int[7];
+//int theX = 0;
 
 // ArrayList of all tokens that have been placed
 ArrayList<Token> tokens = new ArrayList<Token>();
@@ -44,6 +46,9 @@ void setup() {
   drawModeWindow(100, 100);
   if (int(random(0, 2)) == 0) {
     playerFirst = true;
+  }
+  for (int i = 0; i < 7; i++) {
+    topOpen[i] = 6;
   }
 }
 
@@ -120,7 +125,7 @@ void draw() {
   } else {
     drawModeWindow(100, 100);
   }
-
+  showMove();
   // Goes through the ArrayList of tokens and displays them based on their current values
   for (int i = 0; i < tokens.size (); i++) {
     Token currentToken = tokens.get(i);
@@ -164,5 +169,4 @@ void draw() {
     }
   }
 }
-
 

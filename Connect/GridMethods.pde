@@ -37,7 +37,7 @@ void pursue(int row, int col, int dx, int dy) {
     } else {
       canPursue = false;
     }
-    if (canPursue){
+    if (canPursue) {
       comp.pursueX = (col + (dy*2) - 1);
     }
   }
@@ -171,8 +171,10 @@ int deterColumn(int x, boolean forToken) {
     center = 700;
   }
   if (!forToken) {
+   // topOpen[center/100 - 1] --;
     return center;
   } else {
+    topOpen[center/100 - 1] --;
     return center/100 - 1;
   }
 }
