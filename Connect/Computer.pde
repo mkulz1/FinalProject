@@ -14,6 +14,7 @@ class Computer {
   }
 
   void makeMove(boolean isRandomX) {
+    invalidCols.clear();
     if (!isWinner) {
       if ( turn % 2 == 0) {
         fill(255, 0, 0);
