@@ -78,7 +78,12 @@ class Computer {
   }
 
   void checkIf3() {
-    // Looks to defend first
+    for (int i = 0; i < rows - 1; i++) {
+      for (int j = 0; j < cols - 1; j++) {
+       pursue(i, j);
+      }
+    }
+    // Looks to defend first, overrides pursuit
     for (int i = 0; i < rows - 1; i++) {
       for (int j = 0; j < cols - 1; j++) {
         check3Grid(i, j, 1, false);

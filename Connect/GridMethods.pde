@@ -12,6 +12,36 @@ void checkGrid(int row, int col) {
   }
 }
 
+void pursue(int row, int col) {
+  if (!isWinner) {
+    pursue(row, col, 1, 0);
+    pursue(row, col, 0, 1);
+    pursue(row, col, 1, 1);
+    pursue(row, col, -1, 0);
+    pursue(row, col, 0, -1);
+    pursue(row, col, -1, -1);
+    pursue(row, col, 1, -1);
+    pursue(row, col, -1, 1);
+  }
+}
+
+void pursue(int row, int col, int dx, int dy) {
+  boolean canPursue = true;
+  if (!isWinner && !(row + dx * 4 < 0) && !(row + dx * 4 > rows - 1) && !(col + dy * 4 < 0) && !(col + dy * 4 > cols - 1) && !(gameBoard[row][col] == 0)) {
+    if ( row == 0 ) {
+      if (gameBoard[row][col] == 2 && gameBoard[row+dx][col+dy] == 2 && gameBoard[row+(2*dx)][col+(2*dy)] == 0 && gameBoard[row+(3*dx)][col+(3*dy)] == 0) {
+      } else { 
+        canPursue = false;
+      }
+    } else if (gameBoard[row][col] == 2 && gameBoard[row+dx][col+dy] == 2 && gameBoard[row+(2*dx)][col+(2*dy)] == 0 && gameBoard[row+(3*dx)][col+(3*dy)] == 0 && gameBoard[(row-1)+(3*dx)][col+(3*dy)] != 0) {
+    } else {
+      canPursue = false;
+    }
+    comp.nextX = (col + (dy*2) - 1);
+  }
+}
+
+
 void checkGrid(int row, int col, int dx, int dy) {
   // Check if 4 spaces exist in the specified direction
   if (!isWinner && !(row + dx * 4 < 0) && !(row + dx * 4 > rows - 1) && !(col + dy * 4 < 0) && !(col + dy * 4 > cols - 1) && !(gridFilled[row][col].equals(""))) {
