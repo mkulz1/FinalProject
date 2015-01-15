@@ -2,7 +2,7 @@ FinalProject
 ============
 
 1/1/15
--Added a grid animation for connect 4
+-Added a grid animation for connect 4. (Created the basic grid layout for the visual game board.)
 -Clicking creates an ellipse that can be dragged
 
 1/6/15
@@ -35,4 +35,13 @@ FinalProject
 
 1/12/15
 -Computer can now make decisions based on current board
+-Added cases for which the computer makes certain moves in response to specific game Board scenarios.
 -Computer blocks player if the player has 3 tokens in a row
+
+1/13/15
+-Bug fixes.
+-Computer searches to see if there is a case in which there are four slots, and its tokens occupy any three of them, then it makes the winning move and places its token to complete the four. 
+-Computer prioritizes offense over defense. 
+
+1/14/15
+-Create mthod pursue() in which the computer finds two tokens of its own that have two spaces after them. If the two spaces are empty, then it adds its token into the third spot pursuing a win. 
