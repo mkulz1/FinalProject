@@ -44,4 +44,5 @@ FinalProject
 -Computer prioritizes offense over defense. 
 
 1/14/15
--Create mthod pursue() in which the computer finds two tokens of its own that have two spaces after them. If the two spaces are empty, then it adds its token into the third spot pursuing a win. 
+-Create method pursue() in which the computer finds two tokens of its own that have two spaces after them. If the two spaces are empty, then it adds its token into the third spot pursuing a win. 
+-The computer avoids going in spaces that will let the player win on the next turn.
