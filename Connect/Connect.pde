@@ -34,6 +34,7 @@ boolean isModeSelected = false;
 boolean is1Player = false;
 boolean is2Players = false;
 boolean isColorSelected = false;
+boolean isColorRed = false;
 boolean playerFirst = false;
 
 void setup() { 
@@ -72,6 +73,7 @@ void mousePressed() {
       if (token.isValidToken) {
         tokens.add(token);
         turn++;
+        topOpen[token.x/100 - 1] --;
         if (is1Player) {
           playerCanMove = false;
         }
@@ -80,6 +82,7 @@ void mousePressed() {
       if ( mouseX > 280 && mouseX < 380 && mouseY > 340 && mouseY < 390) {
         // Red chosen
         isColorSelected = true;
+        isColorRed = true;
       } else if (mouseX > 410 && mouseX < 510 && mouseY > 340 && mouseY < 390) {
         // blue chosen
         isColorSelected = true;

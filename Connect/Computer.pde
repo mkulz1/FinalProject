@@ -34,6 +34,7 @@ class Computer {
       if (token.isValidToken) {
         tokens.add(token);
         turn++;
+        topOpen[token.x/100 - 1] --;
         playerCanMove = true;
       } else {
         makeMove(true);

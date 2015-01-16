@@ -171,10 +171,8 @@ int deterColumn(int x, boolean forToken) {
     center = 700;
   }
   if (!forToken) {
-   // topOpen[center/100 - 1] --;
     return center;
   } else {
-    topOpen[center/100 - 1] --;
     return center/100 - 1;
   }
 }
