@@ -112,6 +112,7 @@ void mousePressed() {
   if (isModeSelected && isColorSelected && !isWinner && mouseX > 242 && mouseX < 278 && mouseY > 657 && mouseY < 693) {
     showMove = !showMove;
   }
+  reset();
 }
 
 void draw() {
