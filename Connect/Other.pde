@@ -1,6 +1,6 @@
 // Shows what oyur move
 void showMove() {
-  if (isModeSelected && isColorSelected && !isWinner) {
+  if (isModeSelected && isColorSelected && !isWinner && mouseY > 50 && mouseY < 650 && showMove) {
     if (mouseX > 50 && mouseX < 150) {
       if (turn % 2 == 0){
         fill(255, 80, 80);

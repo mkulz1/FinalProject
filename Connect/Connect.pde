@@ -36,6 +36,7 @@ boolean is2Players = false;
 boolean isColorSelected = false;
 boolean isColorRed = false;
 boolean playerFirst = false;
+boolean showMove = false;
 
 void setup() { 
   drawGrid();
@@ -108,6 +109,9 @@ void mousePressed() {
       }
     }
   }
+  if (isModeSelected && isColorSelected && !isWinner && mouseX > 242 && mouseX < 278 && mouseY > 657 && mouseY < 693) {
+    showMove = !showMove;
+  }
 }
 
 void draw() {
@@ -127,6 +131,9 @@ void draw() {
     drawModeWindow(100, 150);
   } else {
     drawModeWindow(100, 100);
+  }
+  if (isModeSelected && isColorSelected) {
+    drawOption();
   }
   showMove();
   // Goes through the ArrayList of tokens and displays them based on their current values
@@ -159,13 +166,13 @@ void draw() {
     }
   }
   if (isWinner && isRed) {
-    if (mouseX > 333 && mouseX < 463 && mouseY > 340 && mouseY < 390){
+    if (mouseX > 333 && mouseX < 463 && mouseY > 340 && mouseY < 390) {
       drawWinnerWindow("Red", 150);
     } else {
       drawWinnerWindow("Red", 100);
     }
   } else if (isWinner && !isRed) {
-    if (mouseX > 333 && mouseX < 463 && mouseY > 340 && mouseY < 390){
+    if (mouseX > 333 && mouseX < 463 && mouseY > 340 && mouseY < 390) {
       drawWinnerWindow("Blue", 150);
     } else {
       drawWinnerWindow("Blue", 100);

@@ -91,3 +91,24 @@ void drawWinnerWindow(String winner, int selectionTint) {
   fill(255);                    
   text("Play Again", 342, 370);
 }
+
+void drawOption() {
+  rectMode(CENTER);
+  if (mouseX > 242 && mouseX < 278 && mouseY > 657 && mouseY < 693) {
+    fill(80);
+  } else {
+    fill(0);
+  }
+  strokeWeight(1);
+  stroke(255);
+  rect(260, 675, 35, 35);
+  if (showMove) {
+    fill(255);
+    rect(260, 675, 20, 20);
+  }
+  f = createFont("Arial", 24, true);
+  textFont(f, 24);
+  fill(255);
+  text("Show moves in advance", 285, 683);
+}
+
