@@ -10,6 +10,10 @@ ArrayList<Token> tokens = new ArrayList<Token>();
 int turn = 0; // even = red // odd = blue
 PFont f; 
 
+//for resetting
+boolean resetDone = true;
+boolean showWinner = false;
+
 // The computer
 Computer comp = new Computer(0);
 // 0 = computer goes on even turns, 1 = computer goes on odd turns
@@ -55,64 +59,64 @@ void setup() {
 }
 
 void mousePressed() {
-  if (mouseX > 50 && mouseX < width - 50 && mouseY > 50 && mouseY < height - 50 && !isWinner && playerCanMove) {
-    if ( turn % 2 == 0) {
-      fill(255, 0, 0);
-    } else {
-      fill(0, 0, 255);
-    }
-    if (isColorSelected) {
-      // Creates a PShape as a token, which is more interactive than a regular ellipse
-      PShape shape = createShape(ELLIPSE, 0, 0, 90, 90);
-      // Adds the PShape to a new Token class
-      Token token = new Token(shape, deterColumn(mouseX, false), mouseY);
-      token.stopPoint(token.x);
-      token.boardLocation(token.x, token.pointStop);
-      token.setGameBoard(true);
+  reset();
+    if (mouseX > 50 && mouseX < width - 50 && mouseY > 50 && mouseY < height - 50 && !isWinner && playerCanMove) {
+      if ( turn % 2 == 0) {
+        fill(255, 0, 0);
+      } else {
+        fill(0, 0, 255);
+      }
+      if (isColorSelected) {
+        // Creates a PShape as a token, which is more interactive than a regular ellipse
+        PShape shape = createShape(ELLIPSE, 0, 0, 90, 90);
+        // Adds the PShape to a new Token class
+        Token token = new Token(shape, deterColumn(mouseX, false), mouseY);
+        token.stopPoint(token.x);
+        token.boardLocation(token.x, token.pointStop);
+        token.setGameBoard(true);
 
-      // Adds the Token to the tokens ArrayList
-      if (token.isValidToken) {
-        tokens.add(token);
-        turn++;
-        topOpen[token.x/100 - 1] --;
-        if (is1Player) {
-          playerCanMove = false;
+        // Adds the Token to the tokens ArrayList
+        if (token.isValidToken) {
+          tokens.add(token);
+          turn++;
+          topOpen[token.x/100 - 1] --;
+          if (is1Player) {
+            playerCanMove = false;
+          }
+        }
+      } else if (isModeSelected) {
+        if ( mouseX > 280 && mouseX < 380 && mouseY > 340 && mouseY < 390) {
+          // Red chosen
+          isColorSelected = true;
+          isColorRed = true;
+        } else if (mouseX > 410 && mouseX < 510 && mouseY > 340 && mouseY < 390) {
+          // blue chosen
+          isColorSelected = true;
+          goesOn = 0;
+          turn++;
+        }
+      } else {
+        if ( mouseX > 280 && mouseX < 380 && mouseY > 340 && mouseY < 390) {
+          isModeSelected = true;
+          is1Player = true;
+
+          drawGrid();
+        } else if (mouseX > 410 && mouseX < 510 && mouseY > 340 && mouseY < 390) {
+          isModeSelected = true;
+          is2Players = true;
+          drawGrid();
         }
       }
-    } else if (isModeSelected) {
-      if ( mouseX > 280 && mouseX < 380 && mouseY > 340 && mouseY < 390) {
-        // Red chosen
-        isColorSelected = true;
-        isColorRed = true;
-      } else if (mouseX > 410 && mouseX < 510 && mouseY > 340 && mouseY < 390) {
-        // blue chosen
-        isColorSelected = true;
-        goesOn = 0;
-        turn++;
-      }
-    } else {
-      if ( mouseX > 280 && mouseX < 380 && mouseY > 340 && mouseY < 390) {
-        isModeSelected = true;
-        is1Player = true;
-
-        drawGrid();
-      } else if (mouseX > 410 && mouseX < 510 && mouseY > 340 && mouseY < 390) {
-        isModeSelected = true;
-        is2Players = true;
-        drawGrid();
+      // Checks if there is a winner for any spot on the grid
+      for (int i = 0; i < rows - 1; i++) {
+        for (int j = 0; j < cols - 1; j++) {
+          checkGrid(i, j);
+        }
       }
     }
-    // Checks if there is a winner for any spot on the grid
-    for (int i = 0; i < rows - 1; i++) {
-      for (int j = 0; j < cols - 1; j++) {
-        checkGrid(i, j);
-      }
+    if (isModeSelected && isColorSelected && !isWinner && mouseX > 242 && mouseX < 278 && mouseY > 657 && mouseY < 693) {
+      showMove = !showMove;
     }
-  }
-  if (isModeSelected && isColorSelected && !isWinner && mouseX > 242 && mouseX < 278 && mouseY > 657 && mouseY < 693) {
-    showMove = !showMove;
-  }
-  reset();
 }
 
 void draw() {
@@ -166,17 +170,19 @@ void draw() {
       comp.makeMove(false);
     }
   }
-  if (isWinner && isRed) {
-    if (mouseX > 333 && mouseX < 463 && mouseY > 340 && mouseY < 390) {
-      drawWinnerWindow("Red", 150);
-    } else {
-      drawWinnerWindow("Red", 100);
-    }
-  } else if (isWinner && !isRed) {
-    if (mouseX > 333 && mouseX < 463 && mouseY > 340 && mouseY < 390) {
-      drawWinnerWindow("Blue", 150);
-    } else {
-      drawWinnerWindow("Blue", 100);
+  if (showWinner) {
+    if (isWinner && isRed) {
+      if (mouseX > 333 && mouseX < 463 && mouseY > 340 && mouseY < 390) {
+        drawWinnerWindow("Red", 150);
+      } else {
+        drawWinnerWindow("Red", 100);
+      }
+    } else if (isWinner && !isRed) {
+      if (mouseX > 333 && mouseX < 463 && mouseY > 340 && mouseY < 390) {
+        drawWinnerWindow("Blue", 150);
+      } else {
+        drawWinnerWindow("Blue", 100);
+      }
     }
   }
 }

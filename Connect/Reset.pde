@@ -2,17 +2,18 @@ void reset() {
   if (isWinner && mouseX > 333 && mouseX < 463 && mouseY > 340 && mouseY < 390) {
 
     // clear Variables
-    int turn = 0;
-    boolean compMoveMade = false;
-    boolean playerCanMove = true;
-    boolean isWinner = false;
-    boolean isRed = false;
-    boolean playerFirst = false;
-    boolean showMove = false;
-    boolean firstMoveMade = false;
-    int nextX = -1;
-    int pursueX = -1;
-    int playerWinX = -1; 
+    showWinner = false;
+    turn = 0;
+    compMoveMade = false;
+    playerCanMove = true;
+    isWinner = false;
+    isRed = false;
+    playerFirst = false;
+    showMove = false;
+    comp.firstMoveMade = false;
+    comp.nextX = -1;
+    comp.pursueX = -1;
+    comp.playerWinX = -1; 
     comp.invalidCols.clear(); // clear
     tokens.clear();
 
@@ -36,7 +37,6 @@ void reset() {
     }
 
     setup();
-    
   }
 }
 

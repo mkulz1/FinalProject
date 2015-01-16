@@ -62,9 +62,11 @@ void checkGrid(int row, int col, int dx, int dy) {
     if (allRed) {
       isWinner = true;
       isRed = true;
+      showWinner = true;
     }
     if (allBlue) {
       isWinner = true;
+      showWinner = true;
     }
   }
 }
