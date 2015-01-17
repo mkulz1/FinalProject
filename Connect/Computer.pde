@@ -48,26 +48,29 @@ class Computer {
   }
 
   int determineX() {
-    checkMAte();
-    checkIf3();
-    if (!firstMoveMade) {
-      firstMoveMade = true;
-      if (gameBoard[0][1] == 1) {
-        return 300;
-      } else if (gameBoard[0][5] == 1) {
-        return 500;
+    if (random(10) < difficulty) {
+      checkMAte();
+      checkIf3();
+      if (!firstMoveMade) {
+        firstMoveMade = true;
+        if (gameBoard[0][1] == 1) {
+          return 300;
+        } else if (gameBoard[0][5] == 1) {
+          return 500;
+        } else {
+          return 400;
+        }
+      } else if (nextX != -1) {
+        int temp = nextX;
+        nextX = -1;
+        return (temp + 1) * 100;
       } else {
-        return 400;
+        return pickRandomX();
       }
-    } else if (nextX != -1) {
-      int temp = nextX;
-      nextX = -1;
-      return (temp + 1) * 100;
     } else {
-      return pickRandomX();
+      return int(random(1, 8)) * 100;
     }
   }
-
 
   void checkMAte() {
     if (gameBoard[0][2] == 0) {
@@ -105,7 +108,7 @@ class Computer {
     int randomX = -1;
     if (invalidCols.size() == 7) {
       invalidCols.clear();
-      if (pursueX != -1){
+      if (pursueX != -1) {
         randomX = pursueX;
         pursueX = -1;
       } else {
