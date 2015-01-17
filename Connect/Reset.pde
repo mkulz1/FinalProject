@@ -17,6 +17,7 @@ void reset() {
     isModeSelected = false;
     is1Player = false;
     is2Players = false;
+    isDifficultySelected = false;
     isColorSelected = false;
     isColorRed = false;
     playerFirst = false;

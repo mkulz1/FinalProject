@@ -37,6 +37,7 @@ boolean isRed = false;
 boolean isModeSelected = false;
 boolean is1Player = false;
 boolean is2Players = false;
+boolean isDifficultySelected = false;
 boolean isColorSelected = false;
 boolean isColorRed = false;
 boolean playerFirst = false;
@@ -60,76 +61,102 @@ void setup() {
 
 void mousePressed() {
   reset();
-    if (mouseX > 50 && mouseX < width - 50 && mouseY > 50 && mouseY < height - 50 && !isWinner && playerCanMove && resetDone) {
-      if ( turn % 2 == 0) {
-        fill(255, 0, 0);
-      } else {
-        fill(0, 0, 255);
-      }
-      if (isColorSelected) {
-        // Creates a PShape as a token, which is more interactive than a regular ellipse
-        PShape shape = createShape(ELLIPSE, 0, 0, 90, 90);
-        // Adds the PShape to a new Token class
-        Token token = new Token(shape, deterColumn(mouseX, false), mouseY);
-        token.stopPoint(token.x);
-        token.boardLocation(token.x, token.pointStop);
-        token.setGameBoard(true);
-
-        // Adds the Token to the tokens ArrayList
-        if (token.isValidToken) {
-          tokens.add(token);
-          turn++;
-          topOpen[token.x/100 - 1] --;
-          if (is1Player) {
-            playerCanMove = false;
-          }
-        }
-      } else if (isModeSelected) {
-        if ( mouseX > 280 && mouseX < 380 && mouseY > 340 && mouseY < 390) {
-          // Red chosen
-          isColorSelected = true;
-          isColorRed = true;
-        } else if (mouseX > 410 && mouseX < 510 && mouseY > 340 && mouseY < 390) {
-          // blue chosen
-          isColorSelected = true;
-          goesOn = 0;
-          turn++;
-        }
-      } else {
-        if ( mouseX > 280 && mouseX < 380 && mouseY > 340 && mouseY < 390) {
-          isModeSelected = true;
-          is1Player = true;
-
-          drawGrid();
-        } else if (mouseX > 410 && mouseX < 510 && mouseY > 340 && mouseY < 390) {
-          isModeSelected = true;
-          is2Players = true;
-          drawGrid();
+  if (mouseX > 50 && mouseX < width - 50 && mouseY > 50 && mouseY < height - 50 && !isWinner && playerCanMove && resetDone) {
+    if ( turn % 2 == 0) {
+      fill(255, 0, 0);
+    } else {
+      fill(0, 0, 255);
+    }
+    if (isColorSelected) {
+      // Creates a PShape as a token, which is more interactive than a regular ellipse
+      PShape shape = createShape(ELLIPSE, 0, 0, 90, 90);
+      // Adds the PShape to a new Token class
+      Token token = new Token(shape, deterColumn(mouseX, false), mouseY);
+      token.stopPoint(token.x);
+      token.boardLocation(token.x, token.pointStop);
+      token.setGameBoard(true);
+      // Adds the Token to the tokens ArrayList
+      if (token.isValidToken) {
+        tokens.add(token);
+        turn++;
+        topOpen[token.x/100 - 1] --;
+        if (is1Player) {
+          playerCanMove = false;
         }
       }
-      // Checks if there is a winner for any spot on the grid
-      for (int i = 0; i < rows - 1; i++) {
-        for (int j = 0; j < cols - 1; j++) {
-          checkGrid(i, j);
-        }
+    } else if (isDifficultySelected) {
+      if ( mouseX > 280 && mouseX < 380 && mouseY > 340 && mouseY < 390) {
+        // Red chosen
+        isColorSelected = true;
+        isColorRed = true;
+      } else if (mouseX > 410 && mouseX < 510 && mouseY > 340 && mouseY < 390) {
+        // blue chosen
+        isColorSelected = true;
+        goesOn = 0;
+        turn++;
+      }
+    } else if (isModeSelected) {
+      if (mouseX > 225 && mouseX < 335 && mouseY > 340 && mouseY < 390) {
+        // Easy chosen
+        comp.difficulty = 6;
+        isDifficultySelected = true;
+        drawGrid();
+      } else if (mouseX > 345 && mouseX < 455 && mouseY > 340 && mouseY < 390) {
+        // Medium chosen
+        comp.difficulty = 8;
+        isDifficultySelected = true;
+        drawGrid();
+      } else if (mouseX > 465 && mouseX < 575 && mouseY > 340 && mouseY < 390) {
+        // Hard chosen
+        comp.difficulty = 10;
+        isDifficultySelected = true;
+        drawGrid();
+      }
+    } else {
+      if ( mouseX > 280 && mouseX < 380 && mouseY > 340 && mouseY < 390) {
+        isModeSelected = true;
+        is1Player = true;
+        drawGrid();
+      } else if (mouseX > 410 && mouseX < 510 && mouseY > 340 && mouseY < 390) {
+        isModeSelected = true;
+        isDifficultySelected = true;
+        is2Players = true;
+        drawGrid();
       }
     }
-    if (isModeSelected && isColorSelected && !isWinner && mouseX > 242 && mouseX < 278 && mouseY > 657 && mouseY < 693) {
-      showMove = !showMove;
+    // Checks if there is a winner for any spot on the grid
+    for (int i = 0; i < rows - 1; i++) {
+      for (int j = 0; j < cols - 1; j++) {
+        checkGrid(i, j);
+      }
     }
-    resetDone = true;
+  }
+  if (isModeSelected && isColorSelected && !isWinner && mouseX > 242 && mouseX < 278 && mouseY > 657 && mouseY < 693) {
+    showMove = !showMove;
+  }
+  resetDone = true;
 }
 
 void draw() {
   if (isModeSelected) {
-    if (isColorSelected) {
-      drawGrid();
-    } else if (mouseX > 280 && mouseX < 380 && mouseY > 340 && mouseY < 390) {
-      drawColorWindow(80, 0);
-    } else if (mouseX > 410 && mouseX < 510 && mouseY > 340 && mouseY < 390) {
-      drawColorWindow(0, 80);
+    if (isDifficultySelected) {
+      if (isColorSelected) {
+        drawGrid();
+      } else if (mouseX > 280 && mouseX < 380 && mouseY > 340 && mouseY < 390) {
+        drawColorWindow(80, 0);
+      } else if (mouseX > 410 && mouseX < 510 && mouseY > 340 && mouseY < 390) {
+        drawColorWindow(0, 80);
+      } else {
+        drawColorWindow(0, 0);
+      }
+    } else if (mouseX > 225 && mouseX < 335 && mouseY > 340 && mouseY < 390) {
+      drawDifficultyWindow(150, 100, 100);
+    } else if (mouseX > 345 && mouseX < 455 && mouseY > 340 && mouseY < 390) {
+      drawDifficultyWindow(100, 150, 100);
+    } else if (mouseX > 465 && mouseX < 575 && mouseY > 340 && mouseY < 390) {
+      drawDifficultyWindow(100, 100, 150);
     } else {
-      drawColorWindow(0, 0);
+      drawDifficultyWindow(100, 100, 100);
     }
   } else if (mouseX > 280 && mouseX < 380 && mouseY > 340 && mouseY < 390) {
     drawModeWindow(150, 100);
@@ -138,7 +165,7 @@ void draw() {
   } else {
     drawModeWindow(100, 100);
   }
-  if (isModeSelected && isColorSelected) {
+  if (isModeSelected && isDifficultySelected &&isColorSelected) {
     drawOption();
   }
   showMove();

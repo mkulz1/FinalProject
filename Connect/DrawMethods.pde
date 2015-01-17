@@ -39,6 +39,42 @@ void drawModeWindow(int selectionTint1, int selectionTint2) {
   text("2 Players", 410, 370);
 }
 
+void drawDifficultyWindow(int selectionTint1, int selectionTint2, int selectionTint3) {
+  rectMode(CENTER);
+  fill(255);
+  strokeWeight(4);
+  stroke(0);
+  rect(400, 350, 380, 100);
+  f = createFont("Arial", 24, true);
+  textFont(f, 24);                
+  fill(0);                    
+  text("Please Select The Difficulty", 255, 325);
+  fill(selectionTint1, selectionTint1, selectionTint1);
+  strokeWeight(1);
+  stroke(0);
+  rect(280, 365, 110, 50);
+  f = createFont("Arial", 24, true);
+  textFont(f, 24);                
+  fill(255);                    
+  text("Easy", 253, 370);
+  fill(selectionTint2, selectionTint2, selectionTint2);
+  strokeWeight(1);
+  stroke(0);
+  rect(400, 365, 110, 50);
+  f = createFont("Arial", 24, true);
+  textFont(f, 24);                
+  fill(255);                    
+  text("Medium", 360, 370);
+  fill(selectionTint3, selectionTint3, selectionTint3);
+  strokeWeight(1);
+  stroke(0);
+  rect(520, 365, 110, 50);
+  f = createFont("Arial", 24, true);
+  textFont(f, 24);                
+  fill(255);                    
+  text("Hard", 494, 370);
+}
+
 void drawColorWindow(int redColorTint, int blueColorTint) {
   rectMode(CENTER);
   fill(255);
