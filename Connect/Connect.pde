@@ -60,7 +60,7 @@ void setup() {
 
 void mousePressed() {
   reset();
-    if (mouseX > 50 && mouseX < width - 50 && mouseY > 50 && mouseY < height - 50 && !isWinner && playerCanMove) {
+    if (mouseX > 50 && mouseX < width - 50 && mouseY > 50 && mouseY < height - 50 && !isWinner && playerCanMove && resetDone) {
       if ( turn % 2 == 0) {
         fill(255, 0, 0);
       } else {
@@ -117,6 +117,7 @@ void mousePressed() {
     if (isModeSelected && isColorSelected && !isWinner && mouseX > 242 && mouseX < 278 && mouseY > 657 && mouseY < 693) {
       showMove = !showMove;
     }
+    resetDone = true;
 }
 
 void draw() {
