@@ -4,6 +4,7 @@ String[][] gridFilled = new String[6][7];
 int[][] gameBoard = new int[6][7];
 int[] topOpen = new int[7];
 //int theX = 0;
+boolean resetDone = true;
 
 // ArrayList of all tokens that have been placed
 ArrayList<Token> tokens = new ArrayList<Token>();
@@ -11,7 +12,6 @@ int turn = 0; // even = red // odd = blue
 PFont f; 
 
 //for resetting
-boolean resetDone = true;
 boolean showWinner = false;
 
 // The computer
