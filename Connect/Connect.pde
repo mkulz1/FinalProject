@@ -40,6 +40,7 @@ int rows = 7;
 // Whether a winner exists
 boolean isWinner = false;
 boolean isRed = false;
+boolean isTie = false;
 
 boolean isModeSelected = false;
 boolean is1Player = false;
@@ -144,6 +145,18 @@ void mousePressed() {
         checkGrid(i, j);
       }
     }
+    // Checks if the grid is filled
+    boolean filledNow = true;
+    for (int i = 0; i < gameBoard.length; i++) {
+      for (int j = 0; j < gameBoard[i].length; j++) {
+        if (gameBoard[i][j] == 0) {
+          filledNow = false;
+        }
+      }
+    }
+    if (filledNow) {
+      isTie = true;
+    }
   }
   if (isModeSelected && isColorSelected && isDifficultySelected && isNameSelected && !isWinner && mouseX > 242 && mouseX < 278 && mouseY > 657 && mouseY < 693) {
     showMove = !showMove;
@@ -221,16 +234,23 @@ void draw() {
   if (showWinner) {
     if (isWinner && isRed) {
       if (mouseX > 333 && mouseX < 463 && mouseY > 340 && mouseY < 390) {
-        drawWinnerWindow("Red", 150);
+        drawWinnerWindow("Red Wins!", 150);
       } else {
-        drawWinnerWindow("Red", 100);
+        drawWinnerWindow("Red Wins!", 100);
       }
     } else if (isWinner && !isRed) {
       if (mouseX > 333 && mouseX < 463 && mouseY > 340 && mouseY < 390) {
-        drawWinnerWindow("Blue", 150);
+        drawWinnerWindow("Blue Wins!", 150);
       } else {
-        drawWinnerWindow("Blue", 100);
+        drawWinnerWindow("Blue Wins!", 100);
       }
+    }
+  }
+  if (isTie) {
+    if (mouseX > 333 && mouseX < 463 && mouseY > 340 && mouseY < 390) {
+      drawWinnerWindow("Tie!", 150);
+    } else {
+      drawWinnerWindow("Tie!", 100);
     }
   }
 }

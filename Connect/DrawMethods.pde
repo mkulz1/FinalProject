@@ -117,8 +117,12 @@ void drawWinnerWindow(String winner, int selectionTint) {
   rect(400, 350, 200, 100);
   f = createFont("Arial", 24, true);
   textFont(f, 24);                
-  fill(0);                    
-  text(winner + " Wins!", 343, 325);
+  fill(0);
+  if (winner.length() == 4){
+    text(winner, 380, 325);
+  } else {
+    text(winner, 343, 325);
+  }
   fill(selectionTint, selectionTint, selectionTint);
   strokeWeight(1);
   stroke(0);

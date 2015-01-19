@@ -1,5 +1,5 @@
 void reset() {
-  if (isWinner && mouseX > 333 && mouseX < 463 && mouseY > 340 && mouseY < 390) {
+  if ((isWinner || isTie) && mouseX > 333 && mouseX < 463 && mouseY > 340 && mouseY < 390) {
     resetDone = false;
 
     // clear Variables
@@ -9,6 +9,7 @@ void reset() {
     playerCanMove = true;
     isWinner = false;
     isRed = false;
+    isTie = false;
     playerFirst = false;
     showMove = false;
     comp = new Computer(0);
