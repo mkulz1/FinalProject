@@ -60,7 +60,9 @@ FinalProject
 -Difficulty affects how often the computer makes a calculated move.
 
 1/18/15
--Displaying player names still needs a pop-up window that prompts for user input.
--Also still need to make prompt based on player mode. Player vs Computer opponent should not have Player 2 be asked to input name. Instead should display "Computer".
--Window will pop-up after mode has been selected, but before difficulty or color.
+-Player names are now displayed at the top of the screen.
+-Still need to make an input window for names.
 
+1/19/15
+-Added window for entering player names.
+-If there is 1 player, the name for player 2 is set to "Computer".
