@@ -75,7 +75,7 @@ void mousePressed() {
     } else {
       fill(0, 0, 255);
     }
-    if (isColorSelected && isNameSelected) {
+    if (isColorSelected) {
       // Creates a PShape as a token, which is more interactive than a regular ellipse
       PShape shape = createShape(ELLIPSE, 0, 0, 90, 90);
       // Adds the PShape to a new Token class
@@ -92,33 +92,37 @@ void mousePressed() {
           playerCanMove = false;
         }
       }
-    } else if (isDifficultySelected && isNameSelected) {
-      if ( mouseX > 280 && mouseX < 380 && mouseY > 340 && mouseY < 390) {
-        // Red chosen
-        isColorSelected = true;
-        isColorRed = true;
-      } else if (mouseX > 410 && mouseX < 510 && mouseY > 340 && mouseY < 390) {
-        // blue chosen
-        isColorSelected = true;
-        goesOn = 0;
-        turn++;
+    } else if (isDifficultySelected) {
+      if (isNameSelected) {
+        if ( mouseX > 280 && mouseX < 380 && mouseY > 340 && mouseY < 390) {
+          // Red chosen
+          isColorSelected = true;
+          isColorRed = true;
+        } else if (mouseX > 410 && mouseX < 510 && mouseY > 340 && mouseY < 390) {
+          // blue chosen
+          isColorSelected = true;
+          goesOn = 0;
+          turn++;
+        }
       }
-    } else if (isModeSelected && isNameSelected) {
-      if (mouseX > 225 && mouseX < 335 && mouseY > 340 && mouseY < 390) {
-        // Easy chosen
-        comp.difficulty = 6;
-        isDifficultySelected = true;
-        drawGrid();
-      } else if (mouseX > 345 && mouseX < 455 && mouseY > 340 && mouseY < 390) {
-        // Medium chosen
-        comp.difficulty = 8;
-        isDifficultySelected = true;
-        drawGrid();
-      } else if (mouseX > 465 && mouseX < 575 && mouseY > 340 && mouseY < 390) {
-        // Hard chosen
-        comp.difficulty = 10;
-        isDifficultySelected = true;
-        drawGrid();
+    } else if (isModeSelected) {
+      if (isNameSelected) {
+        if (mouseX > 225 && mouseX < 335 && mouseY > 340 && mouseY < 390) {
+          // Easy chosen
+          comp.difficulty = 6;
+          isDifficultySelected = true;
+          drawGrid();
+        } else if (mouseX > 345 && mouseX < 455 && mouseY > 340 && mouseY < 390) {
+          // Medium chosen
+          comp.difficulty = 8;
+          isDifficultySelected = true;
+          drawGrid();
+        } else if (mouseX > 465 && mouseX < 575 && mouseY > 340 && mouseY < 390) {
+          // Hard chosen
+          comp.difficulty = 10;
+          isDifficultySelected = true;
+          drawGrid();
+        }
       }
     } else {
       // Single Player one is selected
