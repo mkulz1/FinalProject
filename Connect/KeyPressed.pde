@@ -39,6 +39,7 @@ void keyPressed() {
       }
       if (key == ENTER) {
         if (is1Player) {
+          player2 = "Computer";
           isNameSelected = true;
           onInputWindow = false;
           strokeWeight(1);
