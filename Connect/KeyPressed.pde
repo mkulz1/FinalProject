@@ -28,14 +28,14 @@ void keyPressed() {
             player1 += String.valueOf(numbers[i]);
           }
         }
-        if (key == BACKSPACE) {
-          if (player1.length() > 0)
-            player1 = player1.substring(0, player1.length()-1);
-        }
         if (key == ' ') {
           if (player1.length() > 0)
             player1 += " ";
         }
+      }
+      if (key == BACKSPACE) {
+        if (player1.length() > 0)
+          player1 = player1.substring(0, player1.length()-1);
       }
       if (key == ENTER) {
         if (is1Player) {
@@ -70,20 +70,20 @@ void keyPressed() {
             player2 += String.valueOf(numbers[i]);
           }
         }
-        if (key == BACKSPACE) {
-          if (player2.length() > 0)
-            player2 = player2.substring(0, player2.length()-1);
-        }
         if (key == ' ') {
           if (player2.length() > 0)
             player2 += " ";
         }
-        if (key == ENTER) {
-          isNameSelected = true;
-          onInputWindow = false;
-          strokeWeight(1);
-          drawGrid();
-        }
+      }
+      if (key == BACKSPACE) {
+        if (player2.length() > 0)
+          player2 = player2.substring(0, player2.length()-1);
+      }
+      if (key == ENTER) {
+        isNameSelected = true;
+        onInputWindow = false;
+        strokeWeight(1);
+        drawGrid();
       }
     }
   }

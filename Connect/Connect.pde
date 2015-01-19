@@ -75,7 +75,7 @@ void mousePressed() {
     } else {
       fill(0, 0, 255);
     }
-    if (isColorSelected) {
+    if (isColorSelected && isNameSelected) {
       // Creates a PShape as a token, which is more interactive than a regular ellipse
       PShape shape = createShape(ELLIPSE, 0, 0, 90, 90);
       // Adds the PShape to a new Token class
@@ -92,7 +92,7 @@ void mousePressed() {
           playerCanMove = false;
         }
       }
-    } else if (isDifficultySelected) {
+    } else if (isDifficultySelected && isNameSelected) {
       if ( mouseX > 280 && mouseX < 380 && mouseY > 340 && mouseY < 390) {
         // Red chosen
         isColorSelected = true;
@@ -141,7 +141,7 @@ void mousePressed() {
       }
     }
   }
-  if (isModeSelected && isColorSelected && !isWinner && mouseX > 242 && mouseX < 278 && mouseY > 657 && mouseY < 693) {
+  if (isModeSelected && isColorSelected && isDifficultySelected && isNameSelected && !isWinner && mouseX > 242 && mouseX < 278 && mouseY > 657 && mouseY < 693) {
     showMove = !showMove;
   }
   resetDone = true;
