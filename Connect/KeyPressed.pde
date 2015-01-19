@@ -45,9 +45,10 @@ void keyPressed() {
           strokeWeight(1);
           drawGrid();
         } else {
-          displayName();
+          strokeWeight(1);
+          drawGrid();
           onPlayer2 = true;
-          key = BACKSPACE;
+          key = '.';
         }
       }
     }

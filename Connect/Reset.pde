@@ -27,11 +27,6 @@ void reset() {
     onInputWindow = false;
     onPlayer2 = false;
 
-    // clear Names
-    player1 = "";
-    player2 = "";
-
-
     // clear gridFilled
     for (int i  = 0; i < 6; i++) {
       for (int j = 0; j < 7; j++) {

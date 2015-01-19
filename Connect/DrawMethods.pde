@@ -81,12 +81,12 @@ void drawColorWindow(int redColorTint, int blueColorTint) {
   fill(255);
   strokeWeight(4);
   stroke(0);
-  rect(400, 350, 350, 100);
+  rect(400, 350, 400, 100);
   // Please Select Your Color
   f = createFont("Arial", 24, true);
   textFont(f, 24);                
   fill(0);
-  text("Please Select Your Color", 275, 325);
+  text("Player 1, Please Select Your Color", 215, 325);
   // Red Choice
   fill(255, redColorTint, redColorTint);
   strokeWeight(1);
@@ -154,22 +154,26 @@ void askName(){
   fill(255);
   strokeWeight(4);
   stroke(0);
-  rect(400, 350, 400, 100);
+  rect(400, 350, 400, 130);
   f = createFont("Arial", 24, true);
   textFont(f, 24);                
   fill(0);                    
-  text(askNameText, 210, 325);
+  text(askNameText, 210, 310);
   fill(150);
   strokeWeight(2);
-  rect(400, 365, 330, 45);
+  rect(400, 345, 330, 45);
   f = createFont("Arial", 24, true);
   textFont(f, 24);
   fill(255);
   if (!onPlayer2){
-    text(player1, 240, 375);
+    text(player1, 240, 355);
   } else {
-    text(player2, 240, 375);
+    text(player2, 240, 355);
   }
+  f = createFont("Arial", 24, true);
+  textFont(f, 24);                
+  fill(0);                    
+  text("Press Enter When Finished", 250, 400);
 }
 
 
