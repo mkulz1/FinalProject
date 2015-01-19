@@ -50,3 +50,14 @@ FinalProject
 1/15/15
 -Added option to show what a move will look like before it is made.
 -Put winner message inside of a box with a "play again" button (does nothing yet).
+
+1/16/15
+-Clicking "play again" starts a new game.
+-Mode and color are asked for when starting a new game.
+
+1/17/15
+-Added ability to choose computer difficulty (easy, medium, or hard).
+-Difficulty affects how often the computer makes a calculated move.
+
+1/18/15
+-Preprations for displaying player names.
