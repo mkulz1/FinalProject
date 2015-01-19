@@ -9,6 +9,14 @@ char[] numbers = {
 };
 
 void keyPressed() {
+<<<<<<< HEAD
+  // player 1
+  if (!namePutPlayer1) {
+    if (player1.length() < 15) {
+      for (int i = 0; i < 26; i++) {
+        if (key == alphabetLower[i]) {
+          player1 += String.valueOf(alphabetLower[i]);
+=======
   if (onInputWindow) {
     // player 1
     if (!onPlayer2) {
@@ -17,6 +25,7 @@ void keyPressed() {
           if (key == alphabetLower[i]) {
             player1 += String.valueOf(alphabetLower[i]);
           }
+>>>>>>> FETCH_HEAD
         }
         for (int i = 0; i < 26; i++) {
           if (key == alphabetUpper[i]) {
@@ -52,10 +61,20 @@ void keyPressed() {
         }
       }
     }
+<<<<<<< HEAD
+    if (key == ENTER)
+      namePutPlayer1 = true;
+
+    // player 2
+  } else {
+    if (!namePutPlayer2) {
+      if (player2.length() < 15) {
+=======
     if (onPlayer2) {
       askNameText = "Player 2, Please Enter Your Name:";
       // player 2
       if ( player2.length() < 15) {
+>>>>>>> FETCH_HEAD
         for (int i = 0; i < 26; i++) {
           if (key == alphabetLower[i]) {
             player2 += String.valueOf(alphabetLower[i]);
@@ -65,6 +84,19 @@ void keyPressed() {
           if (key == alphabetUpper[i]) {
             player2 += String.valueOf(alphabetUpper[i]);
           }
+<<<<<<< HEAD
+        }
+        if (key == BACKSPACE) {
+          if (player2.length() > 0)
+            player2 = player2.substring(0, player2.length()-1);
+        }
+        if (key == ' ') {
+          if (player2.length() > 0)
+            player2 += " ";
+        }
+        if (key == ENTER)
+          namePutPlayer1 = true;
+=======
         }
         for (int i = 0; i < 10; i++) {
           if (key == numbers[i]) {
@@ -85,6 +117,7 @@ void keyPressed() {
         onInputWindow = false;
         strokeWeight(1);
         drawGrid();
+>>>>>>> FETCH_HEAD
       }
     }
   }
