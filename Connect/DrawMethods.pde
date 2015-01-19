@@ -162,6 +162,14 @@ void askName(){
   fill(150);
   strokeWeight(2);
   rect(400, 365, 330, 45);
+  f = createFont("Arial", 24, true);
+  textFont(f, 24);
+  fill(255);
+  if (!onPlayer2){
+    text(player1, 240, 375);
+  } else {
+    text(player2, 240, 375);
+  }
 }
 
 

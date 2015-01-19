@@ -44,6 +44,7 @@ void keyPressed() {
           strokeWeight(1);
           drawGrid();
         } else {
+          displayName();
           onPlayer2 = true;
           key = BACKSPACE;
         }
