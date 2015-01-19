@@ -66,3 +66,4 @@ FinalProject
 1/19/15
 -Added window for entering player names.
 -If there is 1 player, the name for player 2 is set to "Computer".
+-Improved color selection pop-up window.
