@@ -3,11 +3,6 @@ void reset() {
     resetDone = false;
 
     // clear Variables
-<<<<<<< HEAD
-    namePutPlayer1 = false;
-    namePutPlayer2 = false;
-=======
->>>>>>> FETCH_HEAD
     showWinner = false;
     turn = 0;
     compMoveMade = false;

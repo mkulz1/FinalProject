@@ -3,21 +3,15 @@ Cell[][] grid;
 String[][] gridFilled = new String[6][7];
 int[][] gameBoard = new int[6][7];
 int[] topOpen = new int[7];
+//int theX = 0;
 boolean resetDone = true;
 
 // Player Names
-<<<<<<< HEAD
-boolean namePutPlayer1 = false;
-boolean namePutPlayer2 = false;
-String player1 = "";
-String player2 = "";
-=======
 String player1 = "";
 String player2 = "";
 String askNameText = "Player 1, Please Enter Your Name:";
 boolean onInputWindow = false;
 boolean onPlayer2 = false;
->>>>>>> FETCH_HEAD
 
 // ArrayList of all tokens that have been placed
 ArrayList<Token> tokens = new ArrayList<Token>();
@@ -135,20 +129,12 @@ void mousePressed() {
       if ( mouseX > 280 && mouseX < 380 && mouseY > 340 && mouseY < 390) {
         isModeSelected = true;
         is1Player = true;
-        player2 = "Computer";
-        namePutPlayer2 = true;
-       // if (!namePutPlayer1)
-       //   askNamePlayer1();
         drawGrid(); 
         // Two Player is selected
       } else if (mouseX > 410 && mouseX < 510 && mouseY > 340 && mouseY < 390) {
         isModeSelected = true;
         isDifficultySelected = true;
         is2Players = true;
-       // while (!namePutPlayer1)
-         // askNamePlayer1();
-       // while (!namePutPlayer2)
-         // askNamePlayer2();
         drawGrid();
       }
     }
