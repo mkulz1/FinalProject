@@ -149,18 +149,29 @@ void drawOption() {
   text("Show moves in advance", 285, 683);
 }
 
-void askName(){
+void askNamePlayer1(){
   rectMode(CENTER);
   fill(255);
   strokeWeight(4);
   stroke(0);
   rect(400, 350, 380, 100);
-  f = createFont("Arial", 24, true);
-  textFont(f, 24);                
+  f = createFont("Arial", 20, true);
+  textFont(f, 20);                
   fill(0);                    
-  text("Player 1 Please Enter Your Name:", 225, 325);
+  text("Player 1 Please Type Your Name:", 225, 325);
 }
 
+void askNamePlayer2(){
+  rectMode(CENTER);
+  fill(255);
+  strokeWeight(4);
+  stroke(0);
+  rect(400, 350, 380, 100);
+  f = createFont("Arial", 20, true);
+  textFont(f, 20);                
+  fill(0);                    
+  text("Player 2 Please Type Your Name:", 225, 325);
+}
 
 void displayName(){
   f = createFont("Arial", 24, true);

@@ -3,7 +3,8 @@ void reset() {
     resetDone = false;
 
     // clear Variables
-    pCount = 0;
+    namePutPlayer1 = false;
+    namePutPlayer2 = false;
     showWinner = false;
     turn = 0;
     compMoveMade = false;

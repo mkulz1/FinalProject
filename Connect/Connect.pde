@@ -3,14 +3,13 @@ Cell[][] grid;
 String[][] gridFilled = new String[6][7];
 int[][] gameBoard = new int[6][7];
 int[] topOpen = new int[7];
-//int theX = 0;
 boolean resetDone = true;
 
 // Player Names
-boolean namePut = false;
+boolean namePutPlayer1 = false;
+boolean namePutPlayer2 = false;
 String player1 = "";
 String player2 = "";
-int pCount = 0;
 
 // ArrayList of all tokens that have been placed
 ArrayList<Token> tokens = new ArrayList<Token>();
@@ -101,10 +100,6 @@ void mousePressed() {
         goesOn = 0;
         turn++;
       }
-    } else if (namePut) { 
-      askName();    
-      if (pCount > 2)
-        namePut = true;
     } else if (isModeSelected) {
       if (mouseX > 225 && mouseX < 335 && mouseY > 340 && mouseY < 390) {
         // Easy chosen
@@ -127,12 +122,20 @@ void mousePressed() {
       if ( mouseX > 280 && mouseX < 380 && mouseY > 340 && mouseY < 390) {
         isModeSelected = true;
         is1Player = true;
+        player2 = "Computer";
+        namePutPlayer2 = true;
+       // if (!namePutPlayer1)
+       //   askNamePlayer1();
         drawGrid(); 
         // Two Player is selected
       } else if (mouseX > 410 && mouseX < 510 && mouseY > 340 && mouseY < 390) {
         isModeSelected = true;
         isDifficultySelected = true;
         is2Players = true;
+       // while (!namePutPlayer1)
+         // askNamePlayer1();
+       // while (!namePutPlayer2)
+         // askNamePlayer2();
         drawGrid();
       }
     }
