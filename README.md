@@ -60,4 +60,9 @@ FinalProject
 -Difficulty affects how often the computer makes a calculated move.
 
 1/18/15
--Preprations for displaying player names.
+-Player names are now displayed at the top of the screen.
+-Still need to make an input window for names.
+
+1/19/15
+-Added window for entering player names.
+-If there is 1 player, the name for player 2 is set to "Computer".

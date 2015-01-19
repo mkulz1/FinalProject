@@ -3,8 +3,11 @@ void reset() {
     resetDone = false;
 
     // clear Variables
+<<<<<<< HEAD
     namePutPlayer1 = false;
     namePutPlayer2 = false;
+=======
+>>>>>>> FETCH_HEAD
     showWinner = false;
     turn = 0;
     compMoveMade = false;
@@ -19,16 +22,15 @@ void reset() {
     isModeSelected = false;
     is1Player = false;
     is2Players = false;
+    isNameSelected = false;
     isDifficultySelected = false;
     isColorSelected = false;
     isColorRed = false;
     playerFirst = false;
     showMove = false;
-
-    // clear Names
-    player1 = "";
-    player2 = "";
-
+    askNameText = "Player 1, Please Enter Your Name:";
+    onInputWindow = false;
+    onPlayer2 = false;
 
     // clear gridFilled
     for (int i  = 0; i < 6; i++) {
