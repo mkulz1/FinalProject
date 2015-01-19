@@ -7,10 +7,11 @@ int[] topOpen = new int[7];
 boolean resetDone = true;
 
 // Player Names
-boolean namePut = false;
 String player1 = "";
 String player2 = "";
-int pCount = 0;
+String askNameText = "Player 1, Please Enter Your Name:";
+boolean onInputWindow = false;
+boolean onPlayer2 = false;
 
 // ArrayList of all tokens that have been placed
 ArrayList<Token> tokens = new ArrayList<Token>();
@@ -43,6 +44,7 @@ boolean isRed = false;
 boolean isModeSelected = false;
 boolean is1Player = false;
 boolean is2Players = false;
+boolean isNameSelected = false;
 boolean isDifficultySelected = false;
 boolean isColorSelected = false;
 boolean isColorRed = false;
@@ -101,11 +103,7 @@ void mousePressed() {
         goesOn = 0;
         turn++;
       }
-    } else if (namePut) { 
-      askName();    
-      if (pCount > 2)
-        namePut = true;
-    } else if (isModeSelected) {
+    } else if (isModeSelected && isNameSelected) {
       if (mouseX > 225 && mouseX < 335 && mouseY > 340 && mouseY < 390) {
         // Easy chosen
         comp.difficulty = 6;
@@ -151,24 +149,29 @@ void mousePressed() {
 
 void draw() {
   if (isModeSelected) {
-    if (isDifficultySelected) {
-      if (isColorSelected) {
-        drawGrid();
-      } else if (mouseX > 280 && mouseX < 380 && mouseY > 340 && mouseY < 390) {
-        drawColorWindow(80, 0);
-      } else if (mouseX > 410 && mouseX < 510 && mouseY > 340 && mouseY < 390) {
-        drawColorWindow(0, 80);
+    if (isNameSelected) {
+      if (isDifficultySelected) {
+        if (isColorSelected) {
+          drawGrid();
+        } else if (mouseX > 280 && mouseX < 380 && mouseY > 340 && mouseY < 390) {
+          drawColorWindow(80, 0);
+        } else if (mouseX > 410 && mouseX < 510 && mouseY > 340 && mouseY < 390) {
+          drawColorWindow(0, 80);
+        } else {
+          drawColorWindow(0, 0);
+        }
+      } else if (mouseX > 225 && mouseX < 335 && mouseY > 340 && mouseY < 390) {
+        drawDifficultyWindow(150, 100, 100);
+      } else if (mouseX > 345 && mouseX < 455 && mouseY > 340 && mouseY < 390) {
+        drawDifficultyWindow(100, 150, 100);
+      } else if (mouseX > 465 && mouseX < 575 && mouseY > 340 && mouseY < 390) {
+        drawDifficultyWindow(100, 100, 150);
       } else {
-        drawColorWindow(0, 0);
+        drawDifficultyWindow(100, 100, 100);
       }
-    } else if (mouseX > 225 && mouseX < 335 && mouseY > 340 && mouseY < 390) {
-      drawDifficultyWindow(150, 100, 100);
-    } else if (mouseX > 345 && mouseX < 455 && mouseY > 340 && mouseY < 390) {
-      drawDifficultyWindow(100, 150, 100);
-    } else if (mouseX > 465 && mouseX < 575 && mouseY > 340 && mouseY < 390) {
-      drawDifficultyWindow(100, 100, 150);
     } else {
-      drawDifficultyWindow(100, 100, 100);
+      onInputWindow = true;
+      askName();
     }
   } else if (mouseX > 280 && mouseX < 380 && mouseY > 340 && mouseY < 390) {
     drawModeWindow(150, 100);
@@ -177,7 +180,7 @@ void draw() {
   } else {
     drawModeWindow(100, 100);
   }
-  if (isModeSelected && isDifficultySelected &&isColorSelected) {
+  if (isModeSelected && isDifficultySelected && isColorSelected && isNameSelected) {
     drawOption();
   }
   showMove();

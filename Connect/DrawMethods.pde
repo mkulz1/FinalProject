@@ -154,11 +154,14 @@ void askName(){
   fill(255);
   strokeWeight(4);
   stroke(0);
-  rect(400, 350, 380, 100);
+  rect(400, 350, 400, 100);
   f = createFont("Arial", 24, true);
   textFont(f, 24);                
   fill(0);                    
-  text("Player 1 Please Enter Your Name:", 225, 325);
+  text(askNameText, 210, 325);
+  fill(150);
+  strokeWeight(2);
+  rect(400, 365, 330, 45);
 }
 
 

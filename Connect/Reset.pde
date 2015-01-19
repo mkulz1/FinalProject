@@ -3,7 +3,6 @@ void reset() {
     resetDone = false;
 
     // clear Variables
-    pCount = 0;
     showWinner = false;
     turn = 0;
     compMoveMade = false;
@@ -18,11 +17,15 @@ void reset() {
     isModeSelected = false;
     is1Player = false;
     is2Players = false;
+    isNameSelected = false;
     isDifficultySelected = false;
     isColorSelected = false;
     isColorRed = false;
     playerFirst = false;
     showMove = false;
+    askNameText = "Player 1, Please Enter Your Name:";
+    onInputWindow = false;
+    onPlayer2 = false;
 
     // clear Names
     player1 = "";
