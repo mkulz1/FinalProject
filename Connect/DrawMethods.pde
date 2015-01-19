@@ -148,3 +148,19 @@ void drawOption() {
   text("Show moves in advance", 285, 683);
 }
 
+void askName(String player){
+  
+}
+
+
+void displayName(){
+  f = createFont("Arial", 24, true);
+  textFont(f, 24);                
+  fill(255);                    
+  text("Player 1: " + player1, 25, 40);
+  f = createFont("Arial", 24, true);
+  textFont(f, 24);                
+  fill(255);                    
+  text("Player 2: " + player2, 450, 40);
+}
+

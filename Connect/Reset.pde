@@ -1,7 +1,7 @@
 void reset() {
   if (isWinner && mouseX > 333 && mouseX < 463 && mouseY > 340 && mouseY < 390) {
     resetDone = false;
-    
+
     // clear Variables
     showWinner = false;
     turn = 0;
@@ -22,6 +22,11 @@ void reset() {
     isColorRed = false;
     playerFirst = false;
     showMove = false;
+
+    // clear Names
+    player1 = "";
+    player2 = "";
+
 
     // clear gridFilled
     for (int i  = 0; i < 6; i++) {

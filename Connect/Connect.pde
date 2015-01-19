@@ -6,6 +6,10 @@ int[] topOpen = new int[7];
 //int theX = 0;
 boolean resetDone = true;
 
+// Player Names
+String player1 = "";
+String player2 = "";
+
 // ArrayList of all tokens that have been placed
 ArrayList<Token> tokens = new ArrayList<Token>();
 int turn = 0; // even = red // odd = blue
@@ -113,10 +117,12 @@ void mousePressed() {
         drawGrid();
       }
     } else {
+      // Single Player one is selected
       if ( mouseX > 280 && mouseX < 380 && mouseY > 340 && mouseY < 390) {
         isModeSelected = true;
         is1Player = true;
         drawGrid();
+        // Two Player is selected
       } else if (mouseX > 410 && mouseX < 510 && mouseY > 340 && mouseY < 390) {
         isModeSelected = true;
         isDifficultySelected = true;
@@ -138,6 +144,7 @@ void mousePressed() {
 }
 
 void draw() {
+  displayName();
   if (isModeSelected) {
     if (isDifficultySelected) {
       if (isColorSelected) {
