@@ -10,6 +10,7 @@ boolean resetDone = true;
 boolean namePut = false;
 String player1 = "";
 String player2 = "";
+int pCount = 0;
 
 // ArrayList of all tokens that have been placed
 ArrayList<Token> tokens = new ArrayList<Token>();
