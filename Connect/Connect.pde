@@ -7,6 +7,7 @@ int[] topOpen = new int[7];
 boolean resetDone = true;
 
 // Player Names
+boolean namePut = false;
 String player1 = "";
 String player2 = "";
 
@@ -121,7 +122,7 @@ void mousePressed() {
       if ( mouseX > 280 && mouseX < 380 && mouseY > 340 && mouseY < 390) {
         isModeSelected = true;
         is1Player = true;
-        drawGrid();
+        drawGrid(); 
         // Two Player is selected
       } else if (mouseX > 410 && mouseX < 510 && mouseY > 340 && mouseY < 390) {
         isModeSelected = true;
@@ -144,7 +145,6 @@ void mousePressed() {
 }
 
 void draw() {
-  displayName();
   if (isModeSelected) {
     if (isDifficultySelected) {
       if (isColorSelected) {
@@ -176,6 +176,7 @@ void draw() {
     drawOption();
   }
   showMove();
+  //displayName(); Super Slow!
   // Goes through the ArrayList of tokens and displays them based on their current values
   for (int i = 0; i < tokens.size (); i++) {
     Token currentToken = tokens.get(i);

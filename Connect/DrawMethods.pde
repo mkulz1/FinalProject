@@ -9,6 +9,7 @@ void drawGrid() {
       grid[i][j].display();
     }
   }
+    displayName();
 }
 
 void drawModeWindow(int selectionTint1, int selectionTint2) {
@@ -148,8 +149,16 @@ void drawOption() {
   text("Show moves in advance", 285, 683);
 }
 
-void askName(String player){
-  
+void askName(int selectionTint1, int selectionTint2){
+  rectMode(CENTER);
+  fill(255);
+  strokeWeight(4);
+  stroke(0);
+  rect(400, 350, 380, 100);
+  f = createFont("Arial", 24, true);
+  textFont(f, 24);                
+  fill(0);                    
+  text("Player 1 Please Enter Your Name:", 225, 325);
 }
 
 
