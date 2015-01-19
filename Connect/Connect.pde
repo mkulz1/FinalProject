@@ -101,6 +101,10 @@ void mousePressed() {
         goesOn = 0;
         turn++;
       }
+    } else if (namePut) { 
+      askName();    
+      if (pCount > 2)
+        namePut = true;
     } else if (isModeSelected) {
       if (mouseX > 225 && mouseX < 335 && mouseY > 340 && mouseY < 390) {
         // Easy chosen

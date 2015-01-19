@@ -149,7 +149,7 @@ void drawOption() {
   text("Show moves in advance", 285, 683);
 }
 
-void askName(int selectionTint1, int selectionTint2){
+void askName(){
   rectMode(CENTER);
   fill(255);
   strokeWeight(4);
