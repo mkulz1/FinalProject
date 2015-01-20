@@ -1,6 +1,8 @@
 FinalProject
 ============
 
+Note: If the program is running slowly, increase Processing's maximum available memory.
+
 1/1/15
 -Added a grid animation for connect 4 (created the basic grid layout for the visual game board.)
 -Clicking creates an ellipse that can be dragged.
@@ -67,3 +69,4 @@ FinalProject
 -Added window for entering player names.
 -If there is 1 player, the name for player 2 is set to "Computer".
 -Improved color selection pop-up window.
+-If the grid is filled, "Tie" is displayed with the option to play again.
